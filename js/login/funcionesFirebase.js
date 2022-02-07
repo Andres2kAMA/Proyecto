@@ -31,16 +31,19 @@ async function crearUsuario(usuario) {
       anyadirUsuarioFirebase(usuario);
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      console.log("error");
     });
 }
 
 async function anyadirUsuarioFirebase(usuario) {
   let usuariosCollection = obtenerColeccionUsuarios();
 
-  const nuevoUsuario = {};
+  const nuevoUsuario = {
+    nombre: usuario[0],
+    apellidos: usuario[1],
+    correo: usuario[2],
+    contrasenya: usuario[3],
+  };
 
   await addDoc(usuariosCollection, nuevoUsuario);
 }
