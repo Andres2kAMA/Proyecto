@@ -1,6 +1,6 @@
 "use strict";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfP9idYMJIJ0u4Z5jZ0UNidCv3JELR0oQ",
