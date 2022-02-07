@@ -1,4 +1,5 @@
 "use strict";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -11,5 +12,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const autentificacion = getAuth(app);
 
-export { app };
+export { app, autentificacion };
