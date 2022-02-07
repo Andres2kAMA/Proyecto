@@ -25,6 +25,11 @@ import {
 //Importo la 'key' para acceder al Firebase.
 import { app, autentificacion } from "../datosFirebase/datosFirebase.js";
 
+const bd = getFirestore(app);
+
+async function obtenerColeccionUsuarios() {
+  return await collection(bd, "Usuarios");
+}
 async function crearUsuario(usuario) {
   createUserWithEmailAndPassword(autentificacion, usuario[2], usuario[3])
     .then((userCredential) => {

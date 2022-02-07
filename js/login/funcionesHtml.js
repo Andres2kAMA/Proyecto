@@ -1,5 +1,7 @@
 "use strict";
 
+import * as plantilla from "./plantilla.js";
+import * as funcionesFirebase from "./funcionesFirebase.js";
 /**
  * Asigno los eventos del div para registrarse.
  */
@@ -8,7 +10,9 @@ function asignacionEventosRegistro() {
     "click",
     function () {
       let datosNuevaCuenta = obtenerDatosRegistro();
-      console.log(datosNuevaCuenta);
+      funcionesFirebase.crearUsuario(datosNuevaCuenta);
+      plantilla.eliminarTodoContenido();
+      plantilla.insertarPlantillaLogin();
     },
     false
   );
