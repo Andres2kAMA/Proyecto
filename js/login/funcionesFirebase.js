@@ -23,7 +23,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 //Importo la 'key' para acceder al Firebase.
-import { app, autentificacion } from "./conexion_Firebase.js";
+import { app, autentificacion } from "../datosFirebase/datosFirebase.js";
 
 async function crearUsuario(usuario) {
   createUserWithEmailAndPassword(autentificacion, usuario[2], usuario[3])
@@ -45,4 +45,4 @@ async function anyadirUsuarioFirebase(usuario) {
   await addDoc(usuariosCollection, nuevoUsuario);
 }
 
-export { validarUsuario };
+export { crearUsuario };
