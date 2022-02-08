@@ -89,8 +89,17 @@ function eliminarTodoContenido() {
   body.removeChild(document.getElementById("contenidoPrincipal"));
 }
 
+/**
+ * JUNTO VARIAS FUNCIONES PARA MOSTRAR EL LOGIN.
+ */
+function mostrarLogin() {
+  eliminarTodoContenido();
+  insertarPlantillaLogin();
+}
+
 export {
   insertarPlantillaLogin,
   insertarPlantillaRegistro,
   eliminarTodoContenido,
+  mostrarLogin,
 };
