@@ -57,4 +57,19 @@ async function anyadirUsuarioFirebase(usuario) {
   plantilla.mostrarLogin();
 }
 
-export { crearUsuario };
+async function validarUsuarioRegistrado(correo, contraseña) {
+  let usuariosCollection = obtenerColeccionUsuarios();
+
+  const usuarios = await getDocs(usuariosCollection);
+
+  usuarios.docs.map((usuario) => {
+    if (
+      usuario.data().contrasenya == contraseña &&
+      usuario.data().correo == correo
+    ) {
+      console.log("d");
+    }
+  });
+}
+
+export { crearUsuario, validarUsuarioRegistrado };

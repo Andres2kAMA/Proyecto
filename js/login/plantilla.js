@@ -9,7 +9,7 @@ const plantillaLogin = `<div id="contenidoPrincipal">
                                                 <img src="img/logo.png" width="48" alt="Logo" />
                                             </div>
                                             <h2 class="fw-bold text-center py-5">Bienvenido</h2>
-                                            <form action="#">
+                                            <form id="formSesion">
                                                 <div class="mb-4">
                                                     <label for="email" class="form-label">Correo electrónico</label>
                                                     <input type="email" class="form-control" name="email" />
@@ -19,7 +19,7 @@ const plantillaLogin = `<div id="contenidoPrincipal">
                                                     <input type="password" class="form-control" name="password" />
                                                 </div>
                                                 <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary">
+                                                <button type="submit" class="btn btn-primary" id="iniciarSesion">
                                                     Iniciar sesión
                                                 </button>
                                                 </div>
@@ -95,6 +95,14 @@ function eliminarTodoContenido() {
 function mostrarLogin() {
   eliminarTodoContenido();
   insertarPlantillaLogin();
+}
+
+/**
+ * JUNTO VARIAS FUNCIONES PARA MOSTRAR EL REGISTRO.
+ */
+function mostrarRegistro() {
+  eliminarTodoContenido();
+  insertarPlantillaRegistro();
 }
 
 export {

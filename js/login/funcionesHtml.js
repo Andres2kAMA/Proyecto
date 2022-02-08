@@ -31,4 +31,12 @@ function obtenerDatosRegistro() {
   return datosNuevaCuenta;
 }
 
-export { asignacionEventosRegistro };
+function obtenerDatosFormularioSesion() {
+  let datosSesion = [];
+  let form = document.getElementById("formSesion");
+  for (let i = 0; i < form.length - 1; i++) {
+    datosSesion.push(form[i].value);
+  }
+  return datosSesion;
+}
+export { asignacionEventosRegistro, obtenerDatosFormularioSesion };
