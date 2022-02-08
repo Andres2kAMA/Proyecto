@@ -4,19 +4,11 @@
 import {
   getFirestore,
   collection,
-  doc,
   getDocs,
-  query,
-  where,
-  orderBy,
   addDoc,
-  updateDoc,
-  deleteDoc,
-  arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -50,7 +42,6 @@ async function anyadirUsuarioFirebase(usuario) {
     nombre: usuario[0],
     apellidos: usuario[1],
     correo: usuario[2],
-    contrasenya: usuario[3],
   };
 
   await addDoc(usuariosCollection, nuevoUsuario);
@@ -58,18 +49,13 @@ async function anyadirUsuarioFirebase(usuario) {
 }
 
 async function validarUsuarioRegistrado(correo, contraseña) {
-  let usuariosCollection = obtenerColeccionUsuarios();
-
-  const usuarios = await getDocs(usuariosCollection);
-
-  usuarios.docs.map((usuario) => {
-    if (
-      usuario.data().contrasenya == contraseña &&
-      usuario.data().correo == correo
-    ) {
-      console.log("d");
-    }
-  });
+  signInWithEmailAndPassword(autentificacion, correo, contraseña)
+    .then((userCredential) => {
+      console.log("object");
+    })
+    .catch((error) => {
+      console.log("error");
+    });
 }
 
 export { crearUsuario, validarUsuarioRegistrado };

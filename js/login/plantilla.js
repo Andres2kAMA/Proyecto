@@ -110,4 +110,5 @@ export {
   insertarPlantillaRegistro,
   eliminarTodoContenido,
   mostrarLogin,
+  mostrarRegistro,
 };

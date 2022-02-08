@@ -13,6 +13,7 @@ function asignacionEventosRegistro() {
       funcionesFirebase.crearUsuario(datosNuevaCuenta);
       plantilla.eliminarTodoContenido();
       plantilla.insertarPlantillaLogin();
+      asignarEventosLogin;
     },
     false
   );
@@ -39,4 +40,28 @@ function obtenerDatosFormularioSesion() {
   }
   return datosSesion;
 }
-export { asignacionEventosRegistro, obtenerDatosFormularioSesion };
+
+function asignarEventosLogin() {
+  document.getElementById("iniciarSesion").addEventListener(
+    "click",
+    function () {
+      let datosForm = obtenerDatosFormularioSesion();
+      funcionesFirebase.validarUsuarioRegistrado(datosForm[0], datosForm[1]);
+    },
+    false
+  );
+
+  document.getElementById("registro").addEventListener(
+    "click",
+    function () {
+      plantilla.mostrarRegistro();
+      asignacionEventosRegistro();
+    },
+    false
+  );
+}
+export {
+  asignacionEventosRegistro,
+  obtenerDatosFormularioSesion,
+  asignarEventosLogin,
+};
