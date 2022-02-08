@@ -56,7 +56,7 @@ const plantillaRegistro = `<div id="contenidoPrincipal">
                                                     </div>
                                                     <div class="mb-4">
                                                         <label for="password" class="form-label">Contraseña</label>
-                                                        <input type="password" class="form-control" name="password" />
+                                                        <input type="password" class="form-control" name="password" placeholder="123456" />
                                                     </div>
                                                     <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary" id="crearCuenta">
