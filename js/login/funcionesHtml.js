@@ -10,10 +10,10 @@ function asignacionEventosRegistro() {
     "click",
     function () {
       let datosNuevaCuenta = obtenerDatosRegistro();
-      funcionesFirebase.crearUsuario(datosNuevaCuenta);
       plantilla.eliminarTodoContenido();
       plantilla.insertarPlantillaLogin();
-      asignarEventosLogin;
+      asignarEventosLogin();
+      funcionesFirebase.crearUsuario(datosNuevaCuenta);
     },
     false
   );

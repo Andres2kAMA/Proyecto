@@ -27,11 +27,15 @@ function obtenerColeccionUsuarios() {
 
 async function crearUsuario(usuario) {
   createUserWithEmailAndPassword(autentificacion, usuario[2], usuario[3])
-    .then((userCredential) => {
+    .then(() => {
       anyadirUsuarioFirebase(usuario);
     })
-    .catch((error) => {
-      console.log("error");
+    .catch(() => {
+      if (document.getElementById("mensajeError") == null) {
+        plantilla.mostrarError(
+          "El usuario ya ha sido registrado anteriormente"
+        );
+      }
     });
 }
 
@@ -45,16 +49,18 @@ async function anyadirUsuarioFirebase(usuario) {
   };
 
   await addDoc(usuariosCollection, nuevoUsuario);
-  plantilla.mostrarLogin();
 }
 
 async function validarUsuarioRegistrado(correo, contraseña) {
   signInWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
+      console.log(userCredential);
       console.log("object");
     })
-    .catch((error) => {
-      console.log("error");
+    .catch(() => {
+      if (document.getElementById("mensajeError") == null) {
+        plantilla.mostrarError("Revisa el usuario o contraseña");
+      }
     });
 }
 

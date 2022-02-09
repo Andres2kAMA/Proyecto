@@ -1,7 +1,7 @@
 "use strict";
 
 const plantillaLogin = `<div id="contenidoPrincipal">
-                            <div class="container w-75 bg-primary mt-5 rounded shadow mb-4">
+                            <div class="container w-75 bg-primary mt-5 rounded shadow mb-4" id="contenedorPrincipal">
                                 <div class="row align-items-stretch">
                                         <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-5rounded" ></div>
                                         <div class="col bg-white p-4 rounded-end">
@@ -19,7 +19,7 @@ const plantillaLogin = `<div id="contenidoPrincipal">
                                                     <input type="password" class="form-control" name="password" />
                                                 </div>
                                                 <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary" id="iniciarSesion">
+                                                <button type="button" class="btn btn-primary" id="iniciarSesion">
                                                     Iniciar sesión
                                                 </button>
                                                 </div>
@@ -59,7 +59,7 @@ const plantillaRegistro = `<div id="contenidoPrincipal">
                                                         <input type="password" class="form-control" name="password" placeholder="123456" />
                                                     </div>
                                                     <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary" id="crearCuenta">
+                                                    <button type="button" class="btn btn-primary" id="crearCuenta">
                                                         Crear cuenta
                                                     </button>
                                                     </div>
@@ -68,6 +68,8 @@ const plantillaRegistro = `<div id="contenidoPrincipal">
                                     </div>
                                 </div>
                             </div>`;
+
+const plantillaError = `<div class="alert alert-danger row align-items-center" id="mensajeError">MENSAJE</div>`;
 
 const body = document.getElementById("main");
 
@@ -105,10 +107,22 @@ function mostrarRegistro() {
   insertarPlantillaRegistro();
 }
 
+function mostrarError(mensajeError) {
+  let divError = modificarPlantillaError(mensajeError);
+  document
+    .getElementById("contenedorPrincipal")
+    .insertAdjacentHTML("afterbegin", divError);
+}
+
+function modificarPlantillaError(mensajeError) {
+  return plantillaError.replace("MENSAJE", mensajeError);
+}
+
 export {
   insertarPlantillaLogin,
   insertarPlantillaRegistro,
   eliminarTodoContenido,
   mostrarLogin,
   mostrarRegistro,
+  mostrarError,
 };

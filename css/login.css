@@ -30,3 +30,8 @@ body {
   background-position: center center;
   background-size: cover;
 }
+
+#contenedorPrincipal {
+  height: max-content;
+  width: max-content;
+}
