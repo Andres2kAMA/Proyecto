@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * Me creo las plantillas necesarias tanto para el login como para el registro.
+ */
 const plantillaLogin = `<div id="contenidoPrincipal">
                             <div class="container w-75 bg-primary mt-5 rounded shadow mb-4" id="contenedorPrincipal">
                                 <div class="row align-items-stretch">
@@ -74,25 +77,28 @@ const plantillaError = `<div class="alert alert-danger row align-items-center" i
 const body = document.getElementById("main");
 
 /**
- * Funciones para insertar las plantillas creadas anteriormente.
+ ** Inserto la plantilla de del Login después del div#main.
  */
 function insertarPlantillaLogin() {
   body.insertAdjacentHTML("afterbegin", plantillaLogin);
 }
 
+/**
+ * Inserto la plantilla de del Registro después del div#main.
+ */
 function insertarPlantillaRegistro() {
   body.insertAdjacentHTML("afterbegin", plantillaRegistro);
 }
 
 /**
- * Función para eliminar todo el contenido del HTML menos el div 'main'.
+ ** Elimino todo el contenido del HTML menos el div#main.
  */
 function eliminarTodoContenido() {
   body.removeChild(document.getElementById("contenidoPrincipal"));
 }
 
 /**
- * JUNTO VARIAS FUNCIONES PARA MOSTRAR EL LOGIN.
+ ** Elimino todo el contenido e imprimo el Login.
  */
 function mostrarLogin() {
   eliminarTodoContenido();
@@ -100,13 +106,17 @@ function mostrarLogin() {
 }
 
 /**
- * JUNTO VARIAS FUNCIONES PARA MOSTRAR EL REGISTRO.
+ ** Elimino todo el contenido e imprimo el Registro.
  */
 function mostrarRegistro() {
   eliminarTodoContenido();
   insertarPlantillaRegistro();
 }
 
+/**
+ ** Muestro el error.
+ * @param {String} mensajeError
+ */
 function mostrarError(mensajeError) {
   let divError = modificarPlantillaError(mensajeError);
   document
@@ -114,13 +124,20 @@ function mostrarError(mensajeError) {
     .insertAdjacentHTML("afterbegin", divError);
 }
 
+/**
+ * Devuelvo el div indicando el error.
+ * @param {String} mensajeError
+ * @returns @param {String}
+ */
 function modificarPlantillaError(mensajeError) {
   return plantillaError.replace("MENSAJE", mensajeError);
 }
 
+/**
+ * TODO: EXPORTS.
+ */
 export {
   insertarPlantillaLogin,
-  insertarPlantillaRegistro,
   eliminarTodoContenido,
   mostrarLogin,
   mostrarRegistro,

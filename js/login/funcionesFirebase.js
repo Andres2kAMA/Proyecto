@@ -1,30 +1,35 @@
 "use strict";
 
-//Importo las funciones que voy a utilizar del Firestore.
+// TODO: IMPORTS.
 import {
   getFirestore,
   collection,
-  getDocs,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-//Importo la 'key' para acceder al Firebase.
 import { app, autentificacion } from "../datosFirebase/datosFirebase.js";
 
 import * as plantilla from "./plantilla.js";
 
 const bd = getFirestore(app);
 
+/**
+ *
+ * @returns Devuelvo la colección de Usuarios.
+ */
 function obtenerColeccionUsuarios() {
   return collection(bd, "Usuarios");
 }
 
+/**
+ ** Creo un usuario y lo añado a la BBDD de Firebase.
+ * @param {Object} usuario
+ */
 async function crearUsuario(usuario) {
   createUserWithEmailAndPassword(autentificacion, usuario[2], usuario[3])
     .then(() => {
@@ -39,6 +44,8 @@ async function crearUsuario(usuario) {
     });
 }
 
+/**
+  obtenerDatosFormularioSesion,
 async function anyadirUsuarioFirebase(usuario) {
   let usuariosCollection = obtenerColeccionUsuarios();
 
@@ -51,11 +58,15 @@ async function anyadirUsuarioFirebase(usuario) {
   await addDoc(usuariosCollection, nuevoUsuario);
 }
 
-async function validarUsuarioRegistrado(correo, contraseña) {
+/**
+ ** Inicio la sesión del usuario.
+ * @param {String} correo
+ * @param {String} contraseña
+ */
+async function iniciarSesion(correo, contraseña) {
   signInWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
-      console.log(userCredential);
-      console.log("object");
+      //Si el usuario ya se ha registrado le redirijo a la tienda.
     })
     .catch(() => {
       if (document.getElementById("mensajeError") == null) {
@@ -64,4 +75,7 @@ async function validarUsuarioRegistrado(correo, contraseña) {
     });
 }
 
-export { crearUsuario, validarUsuarioRegistrado };
+/**
+ * TODO: EXPORTS.
+ */
+export { crearUsuario, iniciarSesion };

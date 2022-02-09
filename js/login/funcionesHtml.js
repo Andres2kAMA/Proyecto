@@ -1,9 +1,36 @@
 "use strict";
 
+/**
+ * TODO: IMPORTS.
+ */
 import * as plantilla from "./plantilla.js";
 import * as funcionesFirebase from "./funcionesFirebase.js";
+
 /**
- * Asigno los eventos del div para registrarse.
+ ** Asigno los eventos del Login.
+ */
+function asignarEventosLogin() {
+  document.getElementById("iniciarSesion").addEventListener(
+    "click",
+    function () {
+      let datosForm = obtenerDatosFormularioSesion();
+      funcionesFirebase.iniciarSesion(datosForm[0], datosForm[1]);
+    },
+    false
+  );
+
+  document.getElementById("registro").addEventListener(
+    "click",
+    function () {
+      plantilla.mostrarRegistro();
+      asignacionEventosRegistro();
+    },
+    false
+  );
+}
+
+/**
+ ** Asigno los eventos del div para registrarse.
  */
 function asignacionEventosRegistro() {
   document.getElementById("crearCuenta").addEventListener(
@@ -20,8 +47,8 @@ function asignacionEventosRegistro() {
 }
 
 /**
- *
- * @returns Obtengo los datos del formulario de registro.
+ * Devuelvo los datos del formulario de registro.
+ * @returns @param {Array}
  */
 function obtenerDatosRegistro() {
   let datosNuevaCuenta = [];
@@ -32,6 +59,10 @@ function obtenerDatosRegistro() {
   return datosNuevaCuenta;
 }
 
+/**
+ ** Devuelvo los datos del formulario de inicio de sesión.
+ * @returns @param {Array}
+ */
 function obtenerDatosFormularioSesion() {
   let datosSesion = [];
   let form = document.getElementById("formSesion");
@@ -41,27 +72,7 @@ function obtenerDatosFormularioSesion() {
   return datosSesion;
 }
 
-function asignarEventosLogin() {
-  document.getElementById("iniciarSesion").addEventListener(
-    "click",
-    function () {
-      let datosForm = obtenerDatosFormularioSesion();
-      funcionesFirebase.validarUsuarioRegistrado(datosForm[0], datosForm[1]);
-    },
-    false
-  );
-
-  document.getElementById("registro").addEventListener(
-    "click",
-    function () {
-      plantilla.mostrarRegistro();
-      asignacionEventosRegistro();
-    },
-    false
-  );
-}
-export {
-  asignacionEventosRegistro,
-  obtenerDatosFormularioSesion,
-  asignarEventosLogin,
-};
+/**
+ * TODO: EXPORTS.
+ */
+export { asignarEventosLogin, asignacionEventosRegistro };
