@@ -15,6 +15,7 @@ import {
 import { app, autentificacion } from "../datosFirebase/datosFirebase.js";
 
 import * as plantilla from "./plantilla.js";
+import * as funcionesTienda from "../tienda/funcionesHtml.js";
 
 const bd = getFirestore(app);
 
@@ -45,7 +46,9 @@ async function crearUsuario(usuario) {
 }
 
 /**
-  obtenerDatosFormularioSesion,
+ * Aññado un usuario a la BBDD.
+ * @param {Object} usuario
+ */
 async function anyadirUsuarioFirebase(usuario) {
   let usuariosCollection = obtenerColeccionUsuarios();
 
@@ -66,7 +69,7 @@ async function anyadirUsuarioFirebase(usuario) {
 async function iniciarSesion(correo, contraseña) {
   signInWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
-      //Si el usuario ya se ha registrado le redirijo a la tienda.
+      funcionesTienda.mostrarTiendaInicio();
     })
     .catch(() => {
       if (document.getElementById("mensajeError") == null) {
