@@ -30,7 +30,7 @@ async function mostrarTodosProductosAnyadir() {
 
   productos.docs.map((producto) => {
     plantilla.imprimirProductoAnyadir(producto.data(), producto.id);
-    funciones.anyadirProducto(`anyadirJuego${producto.id}`, producto.id);
+    funciones.anyadirProducto(producto.id, producto.data());
   });
 }
 

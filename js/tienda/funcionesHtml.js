@@ -8,9 +8,15 @@ import * as funcionesFirebase from "./funcionesFirebase.js";
 import * as funcionesLogin from "../login/funcionesHtml.js";
 import * as plantillaLogin from "../login/plantilla.js";
 
+let juegosCarrito = [];
+
 function mostrarTiendaInicio() {
   plantilla.eliminarTodoContenidoLogin();
   cambiarIdBody();
+  insertarPlantillasTiendaInicio();
+}
+
+function insertarPlantillasTiendaInicio() {
   plantilla.insertarPlantillaHeader();
   plantilla.insertarPlantillaPresentacion();
   plantilla.insertarPlantillaFooter();
@@ -18,6 +24,11 @@ function mostrarTiendaInicio() {
 }
 
 function asignarEventosHeader() {
+  document.getElementById("inicio").addEventListener("click", function () {
+    plantilla.eliminarContenidoPrincipal();
+    insertarPlantillasTiendaInicio();
+  });
+
   document.getElementById("juegos").addEventListener(
     "click",
     function () {
@@ -41,11 +52,13 @@ function asignarEventosHeader() {
   );
 }
 
-function anyadirProducto(idHtml, id) {
-  document.getElementById(idHtml).onclick = function () {
+function anyadirProducto(id, producto) {
+  document.getElementById(`anyadirJuego${id}`).onclick = function () {
     new bootstrap.Toast(document.querySelector(`#toast${id}`)).show();
+    juegosCarrito.push(producto);
   };
 }
+
 function cambiarIdBody() {
   if (document.getElementById("login") != null) {
     document.getElementById("login").id = "tienda";

@@ -7,9 +7,9 @@ const plantillaHeader = `<header class="p-3 mb-3 border-bottom" id="header">
                                 <img src="./img/logo.png" class="rounded-circle pr-5" width="32" height="32"/>
 
                                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                                  <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
+                                  <li><a href="#" id="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
                                   <li><a href="#" id="juegos" class="nav-link px-2 link-dark">Juegos</a></li>
-                                  <li><a href="#" class="nav-link px-2 link-dark">Carrito</a></li>
+                                  <li><a href="#" id="carrito" class="nav-link px-2 link-dark">Carrito</a></li>
                                 </ul>
 
                                 <div class="dropdown text-end">
@@ -76,7 +76,8 @@ function insertarPlantillaHeader() {
 }
 
 function insertarPlantillaPresentacion() {
-  body.insertAdjacentHTML("beforeend", plantillaPresentacion);
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("beforeend", plantillaPresentacion);
 }
 
 function insertarPlantillaDivProductos() {
@@ -110,7 +111,14 @@ function eliminarContenidoJuegos() {
     body.removeChild(document.getElementById("divProductos"));
 }
 function eliminarPresentacion() {
-  body.removeChild(document.getElementById("presentacion"));
+  let header = document.getElementById("header");
+  if (document.getElementById("presentacion") != null)
+    header.removeChild(document.getElementById("presentacion"));
+}
+
+function eliminarContenidoPrincipal() {
+  eliminarTodoContenidoPresentacion();
+  eliminarContenidoJuegos();
 }
 
 function modificarProductoAnyadir(producto, id) {
@@ -161,5 +169,6 @@ export {
   insertarPlantillaDivProductos,
   eliminarPresentacion,
   insertarToast,
+  eliminarContenidoPrincipal,
   eliminarContenidoJuegos,
 };
