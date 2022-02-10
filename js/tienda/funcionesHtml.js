@@ -29,11 +29,24 @@ function asignarEventosHeader() {
     insertarPlantillasTiendaInicio();
   });
 
+  document.getElementById("carrito").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarContenidoPrincipal();
+      insertarPlantillasTiendaInicio();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarPlantillaDivCarrito();
+      insertarProductosCarrito();
+    },
+    false
+  );
+
   document.getElementById("juegos").addEventListener(
     "click",
     function () {
       plantilla.eliminarPresentacion();
-      plantilla.insertarPlantillaDivProductos();
+      plantilla.eliminarCarrito();
+      plantilla.insertarPlantillaDivProductosAnyadir();
       funcionesFirebase.mostrarTodosProductosAnyadir();
     },
     false
@@ -42,8 +55,10 @@ function asignarEventosHeader() {
   document.getElementById("cerrarSesion").addEventListener(
     "click",
     function () {
+      juegosCarrito = [];
       plantilla.eliminarTodoContenidoPresentacion();
       plantilla.eliminarContenidoJuegos();
+      plantilla.eliminarCarrito();
       cambiarIdBody();
       plantillaLogin.mostrarLogin();
       funcionesLogin.asignarEventosLogin();
@@ -52,11 +67,38 @@ function asignarEventosHeader() {
   );
 }
 
+function insertarProductosCarrito() {
+  let precioTotal = 0;
+  if (juegosCarrito.length != 0) {
+    for (let i = 0; i < juegosCarrito.length; i++) {
+      precioTotal += juegosCarrito[i].precio;
+      plantilla.imprimirProducto(juegosCarrito[i]);
+    }
+    plantilla.insertarPlantillaFinalizarCompra(precioTotal);
+    asignarEventoComprar();
+  } else {
+    if (document.getElementById("carritoVacio") == null)
+      plantilla.imprimirAvisoCarritoVacio();
+  }
+}
+
 function anyadirProducto(id, producto) {
   document.getElementById(`anyadirJuego${id}`).onclick = function () {
     new bootstrap.Toast(document.querySelector(`#toast${id}`)).show();
     juegosCarrito.push(producto);
   };
+}
+
+function asignarEventoComprar() {
+  document.getElementById("comprar").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarCarrito();
+      plantilla.insertarPlantillaDivCarrito();
+      plantilla.insertarPlantillaPedidoRealizado();
+    },
+    false
+  );
 }
 
 function cambiarIdBody() {

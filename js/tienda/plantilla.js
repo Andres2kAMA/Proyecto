@@ -50,12 +50,14 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   </p>
                                   
                               </div>`;
-const plantillaDivProductos = `<div id="divProductos" class="row contrarProductos text-center">
+const plantillaDivProductosAnyadir = `<div id="divProductos" class="row contrarProductos text-center">
                               <h2>¡ Añade juegos al carrito !</h2>
+                              </div>`;
+const plantillaDivCarrito = `<div id="divCarrito" class="row contrarProductos text-center">
+                              <h2>Carrito</h2>
                               </div>`;
 
 const plantillaProducto = `<div></div>`;
-
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                               <div class="container p-4 pb-0">
                                 <section class="mb-4">
@@ -70,6 +72,16 @@ const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" 
                             </div>
                           </footer>`;
 
+const plantillaCarritoVacio = `<div class="alert alert-danger text-center" id="carritoVacio">El carrito está vacío</div>`;
+
+const plantillaFinalizarCompra = `<div id="finalizarCompra">
+<div class="alert alert-info text-center ">PRECIO</div>
+<button type="button" class="btn btn-outline-primary col-md-6 m-4" id="comprar">Comprar</button>
+</div>`;
+
+const plantillaPedidoRealizado = `<div class="alert alert-success m-4"  role="alert">
+                                    ¡ Pedido realizado con éxito !
+                                  </div>`;
 const body = document.getElementById("main");
 
 function insertarPlantillaHeader() {
@@ -81,9 +93,14 @@ function insertarPlantillaPresentacion() {
   header.insertAdjacentHTML("afterend", plantillaPresentacion);
 }
 
-function insertarPlantillaDivProductos() {
+function insertarPlantillaDivProductosAnyadir() {
   let header = document.getElementById("header");
-  header.insertAdjacentHTML("afterend", plantillaDivProductos);
+  header.insertAdjacentHTML("afterend", plantillaDivProductosAnyadir);
+}
+
+function insertarPlantillaDivCarrito() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("afterend", plantillaDivCarrito);
 }
 
 function insertarPlantillaFooter() {
@@ -117,6 +134,12 @@ function eliminarPresentacion() {
 function eliminarContenidoPrincipal() {
   eliminarTodoContenidoPresentacion();
   eliminarContenidoJuegos();
+  eliminarCarrito();
+}
+
+function eliminarCarrito() {
+  if (document.getElementById("divCarrito") != null)
+    body.removeChild(document.getElementById("divCarrito"));
 }
 
 function modificarProductoAnyadir(producto, id) {
@@ -157,6 +180,53 @@ function imprimirProductoAnyadir(producto, id) {
   div.insertAdjacentHTML("beforeend", productoModificado);
 }
 
+function modificarProducto(producto) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    `<div class="col-md-6 col-sm-12 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw" class="centrar imagen" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.plataforma}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+            <li class="list-group-item">Pegi: ${producto.pegi} </li>
+          </ul>
+          </div> 
+        </div>
+      </div>`
+  );
+  return plantillaDevolver;
+}
+
+function imprimirProducto(producto) {
+  let div = document.getElementById("divCarrito");
+  let productoModificado = modificarProducto(producto);
+  div.insertAdjacentHTML("beforeend", productoModificado);
+}
+
+function imprimirAvisoCarritoVacio() {
+  let div = document.getElementById("divCarrito");
+  div.insertAdjacentHTML("beforeend", plantillaCarritoVacio);
+}
+
+function insertarPlantillaFinalizarCompra(precio) {
+  let divFinalizarCompra = modificarPlantillaFinalizarCompra(precio);
+  document
+    .getElementById("divCarrito")
+    .insertAdjacentHTML("beforeend", divFinalizarCompra);
+}
+function modificarPlantillaFinalizarCompra(precio) {
+  return plantillaFinalizarCompra.replace("PRECIO", `${precio} €`);
+}
+
+function insertarPlantillaPedidoRealizado() {
+  let div = document.getElementById("divCarrito");
+  div.insertAdjacentHTML("beforeend", plantillaPedidoRealizado);
+}
+
 export {
   insertarPlantillaHeader,
   insertarPlantillaPresentacion,
@@ -164,8 +234,14 @@ export {
   eliminarTodoContenidoPresentacion,
   eliminarTodoContenidoLogin,
   imprimirProductoAnyadir,
-  insertarPlantillaDivProductos,
+  insertarPlantillaDivCarrito,
+  eliminarCarrito,
   eliminarPresentacion,
+  insertarPlantillaDivProductosAnyadir,
   eliminarContenidoPrincipal,
   eliminarContenidoJuegos,
+  imprimirProducto,
+  imprimirAvisoCarritoVacio,
+  insertarPlantillaFinalizarCompra,
+  insertarPlantillaPedidoRealizado,
 };
