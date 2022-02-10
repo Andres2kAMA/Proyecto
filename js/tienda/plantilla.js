@@ -96,7 +96,7 @@ const plantillaDivActualizar = `<div id="divActualizar" class="row contrarProduc
                                 <h2>Actualizar el precio de los juegos</h2>
                               </div>`;
 
-const plantillaDivActualizar = `<div id="divCrearProducto" class="row contrarProductos text-center">
+const plantillaDivCrearProducto = `<div id="divCrearProducto" class="row contrarProductos text-center">
                                 <h2>Inserta los datos del juego</h2>
                                </div>`;
 
@@ -113,7 +113,7 @@ const plantillaMensajeSatisfactorio = `<div id="mensaje" class="alert alert-succ
 
 const plantillaMensajeMal = `<div id="mensaje" class="alert alert-danger m-4 text-center" role="alert">MENSAJE</div>`;
 
-const plantillaFormCrearProducto;
+const plantillaFormCrearProducto = ``;
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
                               <section class="mb-4">
