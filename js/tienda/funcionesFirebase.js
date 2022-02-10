@@ -5,6 +5,8 @@ import {
   getFirestore,
   collection,
   getDocs,
+  doc,
+  deleteDoc,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
@@ -34,7 +36,35 @@ async function mostrarTodosProductosAnyadir() {
   });
 }
 
+async function mostrarTodosProductosEliminar() {
+  const productosCollection = obtenerColeccionProductos();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    plantilla.imprimirProductoEliminar(
+      producto.data(),
+      `eliminar${producto.id}`
+    );
+    funciones.anyadirEventoEliminarProducto(
+      `eliminar${producto.id}`,
+      producto.id
+    );
+  });
+}
+
+async function eliminarJuego(id) {
+  const productosCollection = obtenerColeccionProductos();
+
+  const productoRef = await doc(productosCollection, id);
+
+  await deleteDoc(productoRef, id);
+}
 /**
  * TODO: EXPORTS.
  */
-export { mostrarTodosProductosAnyadir };
+export {
+  mostrarTodosProductosAnyadir,
+  mostrarTodosProductosEliminar,
+  eliminarJuego,
+};

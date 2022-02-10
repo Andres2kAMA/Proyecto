@@ -79,19 +79,20 @@ function asignarEventosHeaderAdmin() {
     plantilla.eliminarContenidoPrincipal();
     insertarPlantillasTiendaInicio();
   });
-  /*
-  document.getElementById("carrito").addEventListener(
+
+  document.getElementById("borrarJuego").addEventListener(
     "click",
     function () {
       plantilla.eliminarContenidoPrincipal();
       insertarPlantillasTiendaInicio();
       plantilla.eliminarPresentacion();
-      plantilla.insertarPlantillaDivCarrito();
-      insertarProductosCarrito();
+      plantilla.insertarPlantillaDivEliminar();
+      funcionesFirebase.mostrarTodosProductosEliminar();
     },
     false
   );
 
+  /*
   document.getElementById("juegos").addEventListener(
     "click",
     function () {
@@ -118,6 +119,17 @@ function asignarEventosHeaderAdmin() {
   );
 }
 
+function anyadirEventoEliminarProducto(idHtml, id) {
+  document.getElementById(idHtml).addEventListener(
+    "click",
+    function () {
+      funcionesFirebase.eliminarJuego(id);
+      plantilla.eliminarContenidoPrincipal();
+      insertarPlantillasTiendaInicio();
+    },
+    false
+  );
+}
 function insertarProductosCarrito() {
   let precioTotal = 0;
   if (juegosCarrito.length != 0) {
@@ -176,4 +188,9 @@ function cambiarIdBodyAdmin() {
 /**
  * TODO: EXPORTS.
  */
-export { mostrarTiendaInicioAdmin, mostrarTiendaInicio, anyadirProducto };
+export {
+  mostrarTiendaInicioAdmin,
+  mostrarTiendaInicio,
+  anyadirProducto,
+  anyadirEventoEliminarProducto,
+};

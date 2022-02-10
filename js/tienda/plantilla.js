@@ -31,8 +31,9 @@ const plantillaHeaderAdmin = `<header class="p-3 mb-3 border-bottom" id="header"
 
                               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                                 <li><a href="#" id="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
+                                <li><a href="#"  class="nav-link px-2 link-dark">Añadir juego</a></li>
                                 <li><a href="#"  class="nav-link px-2 link-dark">Actualizar precio</a></li>
-                                <li><a href="#"  class="nav-link px-2 link-dark">Borrar juego</a></li>
+                                <li><a href="#" id="borrarJuego" class="nav-link px-2 link-dark">Borrar juego</a></li>
                               </ul>
 
                               <div class="dropdown text-end">
@@ -78,6 +79,9 @@ const plantillaDivProductosAnyadir = `<div id="divProductos" class="row contrarP
                               </div>`;
 const plantillaDivCarrito = `<div id="divCarrito" class="row contrarProductos text-center">
                               <h2>Carrito</h2>
+                              </div>`;
+const plantillaDivEliminar = `<div id="divEliminar" class="row contrarProductos text-center">
+                              <h2>Eliminar juegos</h2>
                               </div>`;
 
 const plantillaProducto = `<div></div>`;
@@ -128,6 +132,10 @@ function insertarPlantillaDivProductosAnyadir() {
 function insertarPlantillaDivCarrito() {
   let header = document.getElementById("header");
   header.insertAdjacentHTML("afterend", plantillaDivCarrito);
+}
+function insertarPlantillaDivEliminar() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("afterend", plantillaDivEliminar);
 }
 
 function insertarPlantillaFooter() {
@@ -228,6 +236,35 @@ function modificarProducto(producto) {
   return plantillaDevolver;
 }
 
+function imprimirProductoEliminar(producto, id) {
+  let div = document.getElementById("divEliminar");
+  let productoModificado = modificarProductoEliminar(producto, id);
+  div.insertAdjacentHTML("beforeend", productoModificado);
+}
+
+function modificarProductoEliminar(producto, id) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    `<div class="col-md-6 col-sm-12 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw" class="centrar imagen" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.plataforma}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+            <li class="list-group-item">Pegi: ${producto.pegi} </li>
+          </ul>
+
+          <button type="button" class="btn btn-primaty" id="${id}">Eliminar</button>
+          </div> 
+        </div>
+      </div>`
+  );
+  return plantillaDevolver;
+}
+
 function imprimirProducto(producto) {
   let div = document.getElementById("divCarrito");
   let productoModificado = modificarProducto(producto);
@@ -265,10 +302,12 @@ export {
   eliminarCarrito,
   eliminarPresentacion,
   insertarPlantillaDivProductosAnyadir,
+  insertarPlantillaDivEliminar,
   eliminarContenidoPrincipal,
   eliminarContenidoJuegos,
   imprimirProducto,
   imprimirAvisoCarritoVacio,
   insertarPlantillaFinalizarCompra,
   insertarPlantillaPedidoRealizado,
+  imprimirProductoEliminar,
 };
