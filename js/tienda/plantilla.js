@@ -48,6 +48,7 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   disponemos de un sistema de acumulación de puntos, pero siempre que se realice un pedido 
                                   nosotros te enviaremos un cheque regalo para que la siguiente compra te salga más barata.
                                   </p>
+                                  
                               </div>`;
 const plantillaDivProductos = `<div id="divProductos" class="row contrarProductos text-center">
                               <h2>¡ Añade juegos al carrito !</h2>
@@ -77,7 +78,7 @@ function insertarPlantillaHeader() {
 
 function insertarPlantillaPresentacion() {
   let header = document.getElementById("header");
-  header.insertAdjacentHTML("beforeend", plantillaPresentacion);
+  header.insertAdjacentHTML("afterend", plantillaPresentacion);
 }
 
 function insertarPlantillaDivProductos() {
@@ -89,10 +90,6 @@ function insertarPlantillaFooter() {
   body.insertAdjacentHTML("beforeend", plantillaFooter);
 }
 
-function insertarToast() {
-  let header = document.getElementById("header");
-  header.insertAdjacentHTML("beforeend", mensajeToast);
-}
 /**
  ** Elimino todo el contenido del HTML menos el div#main.
  */
@@ -102,6 +99,7 @@ function eliminarTodoContenidoPresentacion() {
     body.removeChild(document.getElementById("presentacion"));
   body.removeChild(document.getElementById("footer"));
 }
+
 function eliminarTodoContenidoLogin() {
   body.removeChild(document.getElementById("contenidoPrincipal"));
 }
@@ -110,10 +108,10 @@ function eliminarContenidoJuegos() {
   if (document.getElementById("divProductos") != null)
     body.removeChild(document.getElementById("divProductos"));
 }
+
 function eliminarPresentacion() {
-  let header = document.getElementById("header");
   if (document.getElementById("presentacion") != null)
-    header.removeChild(document.getElementById("presentacion"));
+    body.removeChild(document.getElementById("presentacion"));
 }
 
 function eliminarContenidoPrincipal() {
@@ -157,8 +155,8 @@ function imprimirProductoAnyadir(producto, id) {
   let div = document.getElementById("divProductos");
   let productoModificado = modificarProductoAnyadir(producto, id);
   div.insertAdjacentHTML("beforeend", productoModificado);
-  //funcionesHtml.declararEventoAnyadirProducto(`anyadirProducto${id}`, id);
 }
+
 export {
   insertarPlantillaHeader,
   insertarPlantillaPresentacion,
@@ -168,7 +166,6 @@ export {
   imprimirProductoAnyadir,
   insertarPlantillaDivProductos,
   eliminarPresentacion,
-  insertarToast,
   eliminarContenidoPrincipal,
   eliminarContenidoJuegos,
 };
