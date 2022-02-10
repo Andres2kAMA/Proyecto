@@ -10,37 +10,51 @@ import * as plantillaLogin from "../login/plantilla.js";
 
 let juegosCarrito = [];
 
+/**
+ * Muestro la tienda si se ha registrado el Admin.
+ */
 function mostrarTiendaInicioAdmin() {
-  plantilla.eliminarTodoContenidoLogin();
+  plantilla.eliminarLogin();
   cambiarIdBodyAdmin();
   insertarPlantillasTiendaInicio();
   asignarEventosHeaderAdmin();
 }
 
+/**
+ * Muestro la tienda si se ha registrado un usuario.
+ */
 function mostrarTiendaInicio() {
-  plantilla.eliminarTodoContenidoLogin();
+  plantilla.eliminarLogin();
   cambiarIdBody();
   insertarPlantillasTiendaInicio();
   asignarEventosHeader();
 }
 
+/**
+ * Inserto todas las plantillas del inicio.
+ */
 function insertarPlantillasTiendaInicio() {
   plantilla.insertarPlantillaHeader();
   plantilla.insertarPlantillaPresentacion();
   plantilla.insertarPlantillaFooter();
 }
 
+/**
+ * Asigno los eventos del header si se ha logueado el usuario.
+ */
 function asignarEventosHeader() {
   document.getElementById("inicio").addEventListener("click", function () {
-    plantilla.eliminarContenidoPrincipal();
+    plantilla.eliminarTodoContenido();
     insertarPlantillasTiendaInicio();
+    asignarEventosHeader();
   });
 
   document.getElementById("carrito").addEventListener(
     "click",
     function () {
-      plantilla.eliminarContenidoPrincipal();
+      plantilla.eliminarTodoContenido();
       insertarPlantillasTiendaInicio();
+      asignarEventosHeader();
       plantilla.eliminarPresentacion();
       plantilla.insertarPlantillaDivCarrito();
       insertarProductosCarrito();
@@ -63,9 +77,7 @@ function asignarEventosHeader() {
     "click",
     function () {
       juegosCarrito = [];
-      plantilla.eliminarTodoContenidoPresentacion();
-      plantilla.eliminarContenidoJuegos();
-      plantilla.eliminarCarrito();
+      plantilla.eliminarTodoContenido();
       cambiarIdBody();
       plantillaLogin.mostrarLogin();
       funcionesLogin.asignarEventosLogin();
@@ -74,17 +86,22 @@ function asignarEventosHeader() {
   );
 }
 
+/**
+ * Asigno eventos del header si se ha logueado el admin.
+ */
 function asignarEventosHeaderAdmin() {
   document.getElementById("inicio").addEventListener("click", function () {
-    plantilla.eliminarContenidoPrincipal();
+    plantilla.eliminarTodoContenido();
     insertarPlantillasTiendaInicio();
+    asignarEventosHeaderAdmin();
   });
 
   document.getElementById("borrarJuego").addEventListener(
     "click",
     function () {
-      plantilla.eliminarContenidoPrincipal();
+      plantilla.eliminarTodoContenido();
       insertarPlantillasTiendaInicio();
+      asignarEventosHeaderAdmin();
       plantilla.eliminarPresentacion();
       plantilla.insertarPlantillaDivEliminar();
       funcionesFirebase.mostrarTodosProductosEliminar();
@@ -92,25 +109,11 @@ function asignarEventosHeaderAdmin() {
     false
   );
 
-  /*
-  document.getElementById("juegos").addEventListener(
-    "click",
-    function () {
-      plantilla.eliminarPresentacion();
-      plantilla.eliminarCarrito();
-      plantilla.insertarPlantillaDivProductosAnyadir();
-      funcionesFirebase.mostrarTodosProductosAnyadir();
-    },
-    false
-  );
-*/
   document.getElementById("cerrarSesion").addEventListener(
     "click",
     function () {
       juegosCarrito = [];
-      plantilla.eliminarTodoContenidoPresentacion();
-      plantilla.eliminarContenidoJuegos();
-      plantilla.eliminarCarrito();
+      plantilla.eliminarTodoContenido();
       cambiarIdBody();
       plantillaLogin.mostrarLogin();
       funcionesLogin.asignarEventosLogin();
@@ -119,23 +122,33 @@ function asignarEventosHeaderAdmin() {
   );
 }
 
-function anyadirEventoEliminarProducto(idHtml, id) {
+/**
+ * Asigno los eventos para eliminar el producto.
+ * @param {String} idHtml
+ * @param {String} id
+ */
+function asignarEventoEliminarProducto(idHtml, id) {
   document.getElementById(idHtml).addEventListener(
     "click",
     function () {
       funcionesFirebase.eliminarJuego(id);
-      plantilla.eliminarContenidoPrincipal();
+      plantilla.eliminarTodoContenido();
       insertarPlantillasTiendaInicio();
+      asignarEventosHeaderAdmin();
     },
     false
   );
 }
+
+/**
+ * Inserto los productos del carrito.
+ */
 function insertarProductosCarrito() {
   let precioTotal = 0;
   if (juegosCarrito.length != 0) {
     for (let i = 0; i < juegosCarrito.length; i++) {
       precioTotal += juegosCarrito[i].precio;
-      plantilla.imprimirProducto(juegosCarrito[i]);
+      plantilla.imprimirProductoCarrito(juegosCarrito[i]);
     }
     plantilla.insertarPlantillaFinalizarCompra(precioTotal.toFixed(2));
     asignarEventoComprar();
@@ -145,13 +158,21 @@ function insertarProductosCarrito() {
   }
 }
 
-function anyadirProducto(id, producto) {
+/**
+ * Asigno los eventos para añadir los productos al carrito.
+ * @param {String} id
+ * @param {Object} producto
+ */
+function asignarEventoAnyadirProducto(id, producto) {
   document.getElementById(`anyadirJuego${id}`).onclick = function () {
     new bootstrap.Toast(document.querySelector(`#toast${id}`)).show();
     juegosCarrito.push(producto);
   };
 }
 
+/**
+ * Asigno los eventos para finalizar la compra.
+ */
 function asignarEventoComprar() {
   document.getElementById("comprar").addEventListener(
     "click",
@@ -159,12 +180,15 @@ function asignarEventoComprar() {
       juegosCarrito = [];
       plantilla.eliminarCarrito();
       plantilla.insertarPlantillaDivCarrito();
-      plantilla.insertarPlantillaPedidoRealizado();
+      //plantilla.insertarPlantillaPedidoRealizado();
     },
     false
   );
 }
 
+/**
+ * Cambio el ID del body.
+ */
 function cambiarIdBody() {
   if (document.getElementById("tiendaAdmin") == null) {
     if (document.getElementById("login") != null) {
@@ -184,13 +208,12 @@ function cambiarIdBodyAdmin() {
     document.getElementById("tiendaAdmin").id = "login";
   }
 }
-
 /**
  * TODO: EXPORTS.
  */
 export {
   mostrarTiendaInicioAdmin,
   mostrarTiendaInicio,
-  anyadirProducto,
-  anyadirEventoEliminarProducto,
+  asignarEventoAnyadirProducto,
+  asignarEventoEliminarProducto,
 };

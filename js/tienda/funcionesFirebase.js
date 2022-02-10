@@ -25,6 +25,9 @@ function obtenerColeccionProductos() {
   return collection(bd, "Productos");
 }
 
+/**
+ ** Imprimo todos los productos y les asigno un evento para añadirlos al carrito.
+ */
 async function mostrarTodosProductosAnyadir() {
   const productosCollection = obtenerColeccionProductos();
 
@@ -32,10 +35,13 @@ async function mostrarTodosProductosAnyadir() {
 
   productos.docs.map((producto) => {
     plantilla.imprimirProductoAnyadir(producto.data(), producto.id);
-    funciones.anyadirProducto(producto.id, producto.data());
+    funciones.asignarEventoAnyadirProducto(producto.id, producto.data());
   });
 }
 
+/**
+ ** Imprimo todos los productos y les asigno un evento para eliminarlos.
+ */
 async function mostrarTodosProductosEliminar() {
   const productosCollection = obtenerColeccionProductos();
 
@@ -46,13 +52,17 @@ async function mostrarTodosProductosEliminar() {
       producto.data(),
       `eliminar${producto.id}`
     );
-    funciones.anyadirEventoEliminarProducto(
+    funciones.asignarEventoEliminarProducto(
       `eliminar${producto.id}`,
       producto.id
     );
   });
 }
 
+/**
+ ** Elimino el producto de la BBDD.
+ * @param {String} id
+ */
 async function eliminarJuego(id) {
   const productosCollection = obtenerColeccionProductos();
 
@@ -60,6 +70,7 @@ async function eliminarJuego(id) {
 
   await deleteDoc(productoRef, id);
 }
+
 /**
  * TODO: EXPORTS.
  */
