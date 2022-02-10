@@ -116,28 +116,28 @@ const plantillaMensajeMal = `<div id="mensaje" class="alert alert-danger m-4 tex
 const plantillaFormCrearProducto = `<form id="formCrearProducto">
                                       <div class="mb-4">
                                           <label for="nombre" class="form-label">Nombre</label>
-                                          <input type="text" class="form-control" name="nombre" />
+                                          <input type="text" class="form-control text-center" name="nombre" />
                                       </div>
                                       <div class="mb-4">
                                           <label for="pegi" class="form-label">Pegi</label>
-                                          <input type="number" class="form-control" name="pegi" />
+                                          <input type="number" class="form-control text-center" name="pegi" />
                                       </div>
 
                                       <div class="mb-4">
                                           <label for="plataforma" class="form-label">Plataforma</label>
-                                          <input type="text" class="form-control" name="plataforma" />
+                                          <input type="text" class="form-control text-center" name="plataforma" />
                                       </div>
                                       <div class="mb-4">
                                           <label for="precio" class="form-label">Precio</label>
-                                          <input type="number" class="form-control" name="precio" />
+                                          <input type="number" class="form-control text-center" name="precio" />
                                       </div>
 
                                       <div class="mb-4">
-                                          <label for="img" class="form-label">Imñagen</label>
-                                          <input type="text" class="form-control" name="img" />
+                                          <label for="img" class="form-label">Imagen</label>
+                                          <input type="text" class="form-control text-center" name="img" />
                                       </div>
                                       <div class="d-grid">
-                                      <button type="button" class="btn btn-primary" id="enviarFormProducto">
+                                      <button type="button" class="btn btn-primary m-4" id="enviarFormProducto">
                                           Añadir el juego a la BBDD
                                       </button>
                                       </div>
@@ -215,7 +215,10 @@ function insertarPlantillaDivCrearProducto() {
   header.insertAdjacentHTML("afterend", plantillaDivCrearProducto);
 }
 
-function insertarFormularioCrearProducto() {}
+function insertarFormularioCrearProducto() {
+  let div = document.getElementById("divCrearProducto");
+  div.insertAdjacentHTML("beforeend", plantillaFormCrearProducto);
+}
 /**
  * Inserto el footer.
  */
@@ -330,6 +333,7 @@ function eliminarTodoContenido() {
   eliminarCarrito();
   eliminarDivEliminar();
   eliminarDivActualizar();
+  eliminarDivCrearJuego();
   eliminarMensaje();
   eliminarFooter();
 }
@@ -347,6 +351,10 @@ function eliminarDivActualizar() {
     body.removeChild(document.getElementById("divActualizar"));
 }
 
+function eliminarDivCrearJuego() {
+  if (document.getElementById("divCrearProducto") != null)
+    body.removeChild(document.getElementById("divCrearProducto"));
+}
 /**
  * Elimino el login.
  */
@@ -518,6 +526,7 @@ export {
   insertarPlantillaFinalizarCompra,
   insertarMensajePersonalidadoBien,
   insertarMensajePersonalidadoMal,
+  insertarFormularioCrearProducto,
   imprimirProductoAnyadir,
   imprimirProductoCarrito,
   imprimirAvisoCarritoVacio,

@@ -149,6 +149,25 @@ function asignarEventosHeaderAdmin() {
   );
 }
 
+function asignarEventosCrearProducto() {
+  document.getElementById("enviarFormProducto").addEventListener(
+    "click",
+    function () {
+      let juego = obtenerDatosFormulario();
+      let objeto = crearObjetoJuego(juego);
+      funcionesFirebase.anyadirJuego(objeto);
+      plantilla.eliminarTodoContenido();
+      insertarPlantillasTiendaInicio();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarMensajePersonalidadoBien(
+        "Juego añadido de manera satisfactoria"
+      );
+      asignarEventosHeaderAdmin();
+    },
+    false
+  );
+}
+
 /**
  * Asigno los eventos para eliminar el producto.
  * @param {String} idHtml
@@ -169,6 +188,17 @@ function asignarEventoEliminarProducto(idHtml, id) {
     },
     false
   );
+}
+function crearObjetoJuego(datos) {
+  let juego = {
+    nombre: datos[0],
+    pegi: datos[1],
+    plataforma: datos[2],
+    precio: datos[3],
+    imagen: datos[4],
+  };
+
+  return juego;
 }
 
 function asignarEventoActualizarProducto(idHtml, id) {
@@ -277,7 +307,20 @@ function obtenerPrecioFormulario(id) {
     return precio;
   }
 }
-
+function obtenerDatosFormulario() {
+  let form = document.getElementById("formCrearProducto");
+  let juego = [];
+  for (let i = 0; i < form.length - 1; i++) {
+    if (i == form.length - 2 && form[i].value == "") {
+      juego.push(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWXCqn3WKoi7CBqN49xpQ9m3q_CR0cl-eZiT1ZXwak-rIGCTTVojV3ig49o8ikrTa-jns&usqp=CAU"
+      );
+    } else {
+      juego.push(form[i].value);
+    }
+  }
+  return juego;
+}
 /**
  * TODO: EXPORTS.
  */

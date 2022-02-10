@@ -103,6 +103,10 @@ async function actualizarJuego(id, precio) {
   });
 }
 
+async function anyadirJuego(juego) {
+  const productosCollection = obtenerColeccionProductos();
+  await addDoc(productosCollection, juego);
+}
 /**
  * TODO: EXPORTS.
  */
@@ -112,4 +116,5 @@ export {
   mostrarTodosProductosActualizar,
   eliminarJuego,
   actualizarJuego,
+  anyadirJuego,
 };
