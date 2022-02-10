@@ -175,7 +175,7 @@ function asignarEventoActualizarProducto(idHtml, id) {
   document.getElementById(idHtml).addEventListener(
     "click",
     function () {
-      let precio = obtenerPrecioFormulario();
+      let precio = obtenerPrecioFormulario(`formPrecio${id}`);
       if (precio != false) {
         funcionesFirebase.actualizarJuego(id, precio);
         plantilla.eliminarTodoContenido();
@@ -268,8 +268,8 @@ function cambiarIdBodyAdmin() {
   }
 }
 
-function obtenerPrecioFormulario() {
-  let form = document.getElementById("formActualizarPrecio");
+function obtenerPrecioFormulario(id) {
+  let form = document.getElementById(id);
   let precio = form[0].value;
   if (precio < 0 || precio == "") {
     return false;

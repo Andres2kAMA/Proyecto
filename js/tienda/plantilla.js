@@ -268,9 +268,9 @@ function imprimirProductoEliminar(producto, id) {
   div.insertAdjacentHTML("beforeend", productoModificado);
 }
 
-function imprimirProductoActualizar(producto, id) {
+function imprimirProductoActualizar(producto, id, idForm) {
   let div = document.getElementById("divActualizar");
-  let productoModificado = modificarProductoActualizar(producto, id);
+  let productoModificado = modificarProductoActualizar(producto, id, idForm);
   div.insertAdjacentHTML("beforeend", productoModificado);
 }
 
@@ -463,7 +463,7 @@ function modificarProductoEliminar(producto, id) {
   return plantillaDevolver;
 }
 
-function modificarProductoActualizar(producto, id) {
+function modificarProductoActualizar(producto, id, idForm) {
   let plantillaDevolver = plantillaProducto.replace(
     `<div></div>`,
     `<div class="col-md-6 col-sm-12 centrarTexto producto">
@@ -477,7 +477,7 @@ function modificarProductoActualizar(producto, id) {
             <li class="list-group-item">${producto.precio} €</li>
             <li class="list-group-item">Pegi: ${producto.pegi} </li>
           </ul>
-          <form id="formActualizarPrecio">
+          <form id="${idForm}">
             <div class="mb-4">
               <label for="precio" class="form-label">Precio</label>
               <input type="number" class="form-control text-center" name="precio" />

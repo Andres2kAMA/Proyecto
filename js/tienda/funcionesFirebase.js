@@ -83,7 +83,8 @@ async function mostrarTodosProductosActualizar() {
   productos.docs.map((producto) => {
     plantilla.imprimirProductoActualizar(
       producto.data(),
-      `actualizar${producto.id}`
+      `actualizar${producto.id}`,
+      `formPrecio${producto.id}`
     );
     funciones.asignarEventoActualizarProducto(
       `actualizar${producto.id}`,
