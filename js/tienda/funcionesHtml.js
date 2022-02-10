@@ -74,7 +74,7 @@ function insertarProductosCarrito() {
       precioTotal += juegosCarrito[i].precio;
       plantilla.imprimirProducto(juegosCarrito[i]);
     }
-    plantilla.insertarPlantillaFinalizarCompra(precioTotal);
+    plantilla.insertarPlantillaFinalizarCompra(precioTotal.toFixed(2));
     asignarEventoComprar();
   } else {
     if (document.getElementById("carritoVacio") == null)
@@ -93,6 +93,7 @@ function asignarEventoComprar() {
   document.getElementById("comprar").addEventListener(
     "click",
     function () {
+      juegosCarrito = [];
       plantilla.eliminarCarrito();
       plantilla.insertarPlantillaDivCarrito();
       plantilla.insertarPlantillaPedidoRealizado();

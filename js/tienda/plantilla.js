@@ -64,7 +64,7 @@ const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" 
                                   <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="bi bi-facebook"></i></a>
                                   <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="bi bi-twitter"></i></a>
                                   <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" ><i class="bi bi-instagram"></i></a>
-                                  <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="bi bi-github"></i></a>
+                                  <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Andres2kAMA/Proyecto" role="button"><i class="bi bi-github"></i></a>
                                 </section>
                               </div>
                             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
