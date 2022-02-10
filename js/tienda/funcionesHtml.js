@@ -96,6 +96,19 @@ function asignarEventosHeaderAdmin() {
     asignarEventosHeaderAdmin();
   });
 
+  document.getElementById("actualizarJuego").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarTodoContenido();
+      insertarPlantillasTiendaInicio();
+      asignarEventosHeaderAdmin();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarPlantillaDivActualizar();
+      funcionesFirebase.mostrarTodosProductosActualizar();
+    },
+    false
+  );
+
   document.getElementById("borrarJuego").addEventListener(
     "click",
     function () {
@@ -144,6 +157,34 @@ function asignarEventoEliminarProducto(idHtml, id) {
   );
 }
 
+function asignarEventoActualizarProducto(idHtml, id) {
+  document.getElementById(idHtml).addEventListener(
+    "click",
+    function () {
+      let precio = obtenerPrecioFormulario();
+      if (precio != false) {
+        funcionesFirebase.actualizarJuego(id, precio);
+        plantilla.eliminarTodoContenido();
+        insertarPlantillasTiendaInicio();
+        plantilla.eliminarPresentacion();
+        plantilla.insertarMensajePersonalidadoBien(
+          "Producto actualizado de manera satisfactoria"
+        );
+        asignarEventosHeaderAdmin();
+      } else {
+        plantilla.eliminarTodoContenido();
+        insertarPlantillasTiendaInicio();
+        plantilla.eliminarPresentacion();
+        plantilla.insertarMensajePersonalidadoMal(
+          "Inserta los valores correctamente"
+        );
+        asignarEventosHeaderAdmin();
+      }
+    },
+    false
+  );
+}
+
 /**
  * Inserto los productos del carrito.
  */
@@ -167,7 +208,7 @@ function insertarProductosCarrito() {
  * @param {String} id
  * @param {Object} producto
  */
-function asignarEventoAnyadirProducto(id, producto) {
+function asignarEventoAnyadirProductoCarrito(id, producto) {
   document.getElementById(`anyadirJuego${id}`).onclick = function () {
     new bootstrap.Toast(document.querySelector(`#toast${id}`)).show();
     juegosCarrito.push(producto);
@@ -212,12 +253,24 @@ function cambiarIdBodyAdmin() {
     document.getElementById("tiendaAdmin").id = "login";
   }
 }
+
+function obtenerPrecioFormulario() {
+  let form = document.getElementById("formActualizarPrecio");
+  let precio = form[0].value;
+  if (precio < 0 || precio == "") {
+    return false;
+  } else {
+    return precio;
+  }
+}
+
 /**
  * TODO: EXPORTS.
  */
 export {
   mostrarTiendaInicioAdmin,
   mostrarTiendaInicio,
-  asignarEventoAnyadirProducto,
+  asignarEventoAnyadirProductoCarrito,
   asignarEventoEliminarProducto,
+  asignarEventoActualizarProducto,
 };

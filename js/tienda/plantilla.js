@@ -36,7 +36,7 @@ const plantillaHeaderAdmin = `<header class="p-3 mb-3 border-bottom" id="header"
                                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                                       <li><a href="#" id="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
                                       <li><a href="#"  class="nav-link px-2 link-dark">Añadir juego</a></li>
-                                      <li><a href="#"  class="nav-link px-2 link-dark">Actualizar precio</a></li>
+                                      <li><a href="#" id="actualizarJuego" class="nav-link px-2 link-dark">Actualizar precio</a></li>
                                       <li><a href="#" id="borrarJuego" class="nav-link px-2 link-dark">Borrar juego</a></li>
                                     </ul>
 
@@ -92,6 +92,9 @@ const plantillaDivCarrito = `<div id="divCarrito" class="row contrarProductos te
 const plantillaDivEliminar = `<div id="divEliminar" class="row contrarProductos text-center">
                                 <h2>Eliminar juegos</h2>
                               </div>`;
+const plantillaDivActualizar = `<div id="divActualizar" class="row contrarProductos text-center">
+                                <h2>Actualizar el precio de los juegos</h2>
+                              </div>`;
 
 const plantillaProducto = `<div></div>`;
 
@@ -103,6 +106,8 @@ const plantillaFinalizarCompra = `<div id="finalizarCompra">
                                   </div>`;
 
 const plantillaMensajeSatisfactorio = `<div id="mensaje" class="alert alert-success m-4 text-center" role="alert">MENSAJE</div>`;
+
+const plantillaMensajeMal = `<div id="mensaje" class="alert alert-danger m-4 text-center" role="alert">MENSAJE</div>`;
 
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
@@ -164,6 +169,14 @@ function insertarPlantillaDivEliminar() {
 }
 
 /**
+ * Inserto el div donde van a ir los productos para actualizar su precio.
+ */
+function insertarPlantillaDivActualizar() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("afterend", plantillaDivActualizar);
+}
+
+/**
  * Inserto el footer.
  */
 function insertarPlantillaFooter() {
@@ -181,9 +194,15 @@ function insertarPlantillaFinalizarCompra(precio) {
     .insertAdjacentHTML("beforeend", divFinalizarCompra);
 }
 
-function insertarMensajePersonalidado(mensaje) {
+function insertarMensajePersonalidadoBien(mensaje) {
   let header = document.getElementById("header");
-  let mensajePersonalidado = modificarPlantillaMensaje(mensaje);
+  let mensajePersonalidado = modificarPlantillaMensajeBien(mensaje);
+  header.insertAdjacentHTML("afterend", mensajePersonalidado);
+}
+
+function insertarMensajePersonalidadoMal(mensaje) {
+  let header = document.getElementById("header");
+  let mensajePersonalidado = modificarPlantillaMensajeMal(mensaje);
   header.insertAdjacentHTML("afterend", mensajePersonalidado);
 }
 
@@ -206,6 +225,12 @@ function imprimirProductoAnyadir(producto, id) {
 function imprimirProductoEliminar(producto, id) {
   let div = document.getElementById("divEliminar");
   let productoModificado = modificarProductoEliminar(producto, id);
+  div.insertAdjacentHTML("beforeend", productoModificado);
+}
+
+function imprimirProductoActualizar(producto, id) {
+  let div = document.getElementById("divActualizar");
+  let productoModificado = modificarProductoActualizar(producto, id);
   div.insertAdjacentHTML("beforeend", productoModificado);
 }
 
@@ -264,6 +289,7 @@ function eliminarTodoContenido() {
   eliminarJuegosAnyadir();
   eliminarCarrito();
   eliminarDivEliminar();
+  eliminarDivActualizar();
   eliminarMensaje();
   eliminarFooter();
 }
@@ -274,6 +300,11 @@ function eliminarTodoContenido() {
 function eliminarDivEliminar() {
   if (document.getElementById("divEliminar") != null)
     body.removeChild(document.getElementById("divEliminar"));
+}
+
+function eliminarDivActualizar() {
+  if (document.getElementById("divActualizar") != null)
+    body.removeChild(document.getElementById("divActualizar"));
 }
 
 /**
@@ -392,10 +423,40 @@ function modificarProductoEliminar(producto, id) {
   return plantillaDevolver;
 }
 
-function modificarPlantillaMensaje(mensaje) {
+function modificarProductoActualizar(producto, id) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    `<div class="col-md-6 col-sm-12 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw" class="centrar imagen" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.plataforma}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+            <li class="list-group-item">Pegi: ${producto.pegi} </li>
+          </ul>
+          <form id="formActualizarPrecio">
+            <div class="mb-4">
+              <label for="precio" class="form-label">Precio</label>
+              <input type="number" class="form-control text-center" name="precio" />
+          </div>
+          <button type="button" class="btn btn-primary" id="${id}">Actualizar</button>
+          </div> 
+        </div>
+      </div>`
+  );
+  return plantillaDevolver;
+}
+
+function modificarPlantillaMensajeBien(mensaje) {
   return plantillaMensajeSatisfactorio.replace("MENSAJE", mensaje);
 }
 
+function modificarPlantillaMensajeMal(mensaje) {
+  return plantillaMensajeMal.replace("MENSAJE", mensaje);
+}
 /**
  * Modifico la plantilla indicando el precio.
  * @param {Int} precio
@@ -412,16 +473,20 @@ export {
   insertarPlantillaDivCarrito,
   insertarPlantillaDivProductosAnyadir,
   insertarPlantillaDivEliminar,
+  insertarPlantillaDivActualizar,
   insertarPlantillaFinalizarCompra,
-  insertarMensajePersonalidado,
+  insertarMensajePersonalidadoBien,
+  insertarMensajePersonalidadoMal,
   imprimirProductoAnyadir,
   imprimirProductoCarrito,
   imprimirAvisoCarritoVacio,
   imprimirProductoEliminar,
+  imprimirProductoActualizar,
   eliminarCarrito,
   eliminarPresentacion,
   eliminarJuegosAnyadir,
   eliminarTodoContenido,
   eliminarLogin,
   eliminarDivEliminar,
+  eliminarDivActualizar,
 };

@@ -7,6 +7,7 @@ import {
   getDocs,
   doc,
   deleteDoc,
+  updateDoc,
   addDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
@@ -35,7 +36,7 @@ async function mostrarTodosProductosAnyadir() {
 
   productos.docs.map((producto) => {
     plantilla.imprimirProductoAnyadir(producto.data(), producto.id);
-    funciones.asignarEventoAnyadirProducto(producto.id, producto.data());
+    funciones.asignarEventoAnyadirProductoCarrito(producto.id, producto.data());
   });
 }
 
@@ -72,10 +73,42 @@ async function eliminarJuego(id) {
 }
 
 /**
+ ** Imprimo todos los productos y les asigno un evento para actualizarlos.
+ */
+async function mostrarTodosProductosActualizar() {
+  const productosCollection = obtenerColeccionProductos();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    plantilla.imprimirProductoActualizar(
+      producto.data(),
+      `actualizar${producto.id}`
+    );
+    funciones.asignarEventoActualizarProducto(
+      `actualizar${producto.id}`,
+      producto.id
+    );
+  });
+}
+
+async function actualizarJuego(id, precio) {
+  const productosCollection = obtenerColeccionProductos();
+
+  const productoRef = await doc(productosCollection, id);
+
+  await updateDoc(productoRef, {
+    precio: precio,
+  });
+}
+
+/**
  * TODO: EXPORTS.
  */
 export {
   mostrarTodosProductosAnyadir,
   mostrarTodosProductosEliminar,
+  mostrarTodosProductosActualizar,
   eliminarJuego,
+  actualizarJuego,
 };
