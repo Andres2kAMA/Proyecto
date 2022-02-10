@@ -526,7 +526,7 @@ function modificarProductoActualizar(producto, id, idForm) {
           <form id="${idForm}">
             <div class="mb-4">
               <label for="precio" class="form-label">Precio</label>
-              <input type="number" class="form-control text-center" name="precio" />
+              <input type="number" class="form-control text-center" placeholder="Inserta el precio" name="precio" />
           </div>
           <button type="button" class="btn btn-primary" id="${id}">Actualizar</button>
           </div> 
