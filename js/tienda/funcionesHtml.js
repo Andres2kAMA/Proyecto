@@ -134,6 +134,10 @@ function asignarEventoEliminarProducto(idHtml, id) {
       funcionesFirebase.eliminarJuego(id);
       plantilla.eliminarTodoContenido();
       insertarPlantillasTiendaInicio();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarMensajePersonalidado(
+        "Producto eliminado de manera satisfactoria"
+      );
       asignarEventosHeaderAdmin();
     },
     false

@@ -62,6 +62,7 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   prestandoles el mejor servicio por parte de todo el personal de la empresa,  
                                   manteniendo siempre actualizado nuestro catálogo de juegos y artículos para las diferentes plataformas.
                                   </p>
+                                  <br/><br/>
                                   <p>
                                   Desde 1991, miles de clientes satisfechos nos avalan.
                                   También compramos todos tus juegos al mejor precio.
@@ -69,6 +70,7 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   con la máxima velocidad y con la confianza que podemos ofreceros 
                                   con todos nuestros años de experiencia.
                                   </p>
+                                  <br/><br/>
                                   <p>
                                   Para que nuestros clientes estén informados, tenemos a su disposición un sistema de boletines 
                                   donde les informaremos de las últimas noticias del mundo del videojuego y de las últimas 
@@ -76,6 +78,7 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   disponemos de un sistema de acumulación de puntos, pero siempre que se realice un pedido 
                                   nosotros te enviaremos un cheque regalo para que la siguiente compra te salga más barata.
                                   </p>
+                                  <br/><br/><br/><br/><br/><br/>
                               </div>`;
 
 const plantillaDivProductosAnyadir = `<div id="divProductos" class="row contrarProductos text-center">
@@ -99,7 +102,7 @@ const plantillaFinalizarCompra = `<div id="finalizarCompra">
                                     <button type="button" class="btn btn-outline-primary col-md-6 m-4" id="comprar">Comprar</button>
                                   </div>`;
 
-const plantillaMensajeSatisfactorio = `<div class="alert alert-success m-4" role="alert">MENSAJE</div>`;
+const plantillaMensajeSatisfactorio = `<div id="mensaje" class="alert alert-success m-4 text-center" role="alert">MENSAJE</div>`;
 
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
@@ -178,6 +181,12 @@ function insertarPlantillaFinalizarCompra(precio) {
     .insertAdjacentHTML("beforeend", divFinalizarCompra);
 }
 
+function insertarMensajePersonalidado(mensaje) {
+  let header = document.getElementById("header");
+  let mensajePersonalidado = modificarPlantillaMensaje(mensaje);
+  header.insertAdjacentHTML("afterend", mensajePersonalidado);
+}
+
 /**
  * Imprimo el producto con la función de añadir.
  * @param {Object} producto
@@ -240,6 +249,12 @@ function eliminarFooter() {
   body.removeChild(document.getElementById("footer"));
 }
 
+function eliminarMensaje() {
+  if (document.getElementById("mensaje") != null) {
+    body.removeChild(document.getElementById("mensaje"));
+  }
+}
+
 /**
  * Elimino todo el contenido del inicio.
  */
@@ -249,6 +264,7 @@ function eliminarTodoContenido() {
   eliminarJuegosAnyadir();
   eliminarCarrito();
   eliminarDivEliminar();
+  eliminarMensaje();
   eliminarFooter();
 }
 
@@ -368,12 +384,16 @@ function modificarProductoEliminar(producto, id) {
             <li class="list-group-item">Pegi: ${producto.pegi} </li>
           </ul>
 
-          <button type="button" class="btn btn-primaty" id="${id}">Eliminar</button>
+          <button type="button" class="btn btn-primary" id="${id}">Eliminar</button>
           </div> 
         </div>
       </div>`
   );
   return plantillaDevolver;
+}
+
+function modificarPlantillaMensaje(mensaje) {
+  return plantillaMensajeSatisfactorio.replace("MENSAJE", mensaje);
 }
 
 /**
@@ -393,6 +413,7 @@ export {
   insertarPlantillaDivProductosAnyadir,
   insertarPlantillaDivEliminar,
   insertarPlantillaFinalizarCompra,
+  insertarMensajePersonalidado,
   imprimirProductoAnyadir,
   imprimirProductoCarrito,
   imprimirAvisoCarritoVacio,
