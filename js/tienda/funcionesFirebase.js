@@ -93,6 +93,11 @@ async function mostrarTodosProductosActualizar() {
   });
 }
 
+/**
+ ** Actualizo el precio del juego.
+ * @param {String} id
+ * @param {Int} precio
+ */
 async function actualizarJuego(id, precio) {
   const productosCollection = obtenerColeccionProductos();
 
@@ -103,10 +108,15 @@ async function actualizarJuego(id, precio) {
   });
 }
 
+/**
+ ** Añado un juego a la BBDD.
+ * @param {Object} juego
+ */
 async function anyadirJuego(juego) {
   const productosCollection = obtenerColeccionProductos();
   await addDoc(productosCollection, juego);
 }
+
 /**
  * TODO: EXPORTS.
  */

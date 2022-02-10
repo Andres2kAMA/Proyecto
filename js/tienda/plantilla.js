@@ -160,7 +160,7 @@ const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" 
 const body = document.getElementById("main");
 
 /**
- * Dependiendo quien se ha registrado inserto una plantilla header para el administrador o para el usuario.
+ ** Dependiendo quien se ha registrado inserto una plantilla header para el administrador o para el usuario.
  */
 function insertarPlantillaHeader() {
   if (document.getElementById("tienda") != null) {
@@ -171,7 +171,7 @@ function insertarPlantillaHeader() {
 }
 
 /**
- * Inserto la plantilla de presentación.
+ ** Inserto la plantilla de presentación.
  */
 function insertarPlantillaPresentacion() {
   let header = document.getElementById("header");
@@ -179,7 +179,7 @@ function insertarPlantillaPresentacion() {
 }
 
 /**
- * Inserto el div de los productos a añadir.
+ ** Inserto el div de los productos a añadir.
  */
 function insertarPlantillaDivProductosAnyadir() {
   let header = document.getElementById("header");
@@ -187,7 +187,7 @@ function insertarPlantillaDivProductosAnyadir() {
 }
 
 /**
- * Inserto el div de los productos del carrito.
+ ** Inserto el div de los productos del carrito.
  */
 function insertarPlantillaDivCarrito() {
   let header = document.getElementById("header");
@@ -195,7 +195,7 @@ function insertarPlantillaDivCarrito() {
 }
 
 /**
- * Inserto el div de los productos a eliminar.
+ ** Inserto el div de los productos a eliminar.
  */
 function insertarPlantillaDivEliminar() {
   let header = document.getElementById("header");
@@ -203,31 +203,38 @@ function insertarPlantillaDivEliminar() {
 }
 
 /**
- * Inserto el div donde van a ir los productos para actualizar su precio.
+ ** Inserto el div donde van a ir los productos para actualizar su precio.
  */
 function insertarPlantillaDivActualizar() {
   let header = document.getElementById("header");
   header.insertAdjacentHTML("afterend", plantillaDivActualizar);
 }
 
+/**
+ ** Inserto el div donde va a ir el formulario para crear el producto.
+ */
 function insertarPlantillaDivCrearProducto() {
   let header = document.getElementById("header");
   header.insertAdjacentHTML("afterend", plantillaDivCrearProducto);
 }
 
+/**
+ ** Inserto el formulario para crear el producto.
+ */
 function insertarFormularioCrearProducto() {
   let div = document.getElementById("divCrearProducto");
   div.insertAdjacentHTML("beforeend", plantillaFormCrearProducto);
 }
+
 /**
- * Inserto el footer.
+ ** Inserto el footer.
  */
 function insertarPlantillaFooter() {
   body.insertAdjacentHTML("beforeend", plantillaFooter);
 }
 
 /**
- * Inserto la plantilla que permite finalizar la compra.
+ ** Inserto la plantilla que permite finalizar la compra.
  * @param {Int} precio
  */
 function insertarPlantillaFinalizarCompra(precio) {
@@ -237,12 +244,20 @@ function insertarPlantillaFinalizarCompra(precio) {
     .insertAdjacentHTML("beforeend", divFinalizarCompra);
 }
 
+/**
+ ** Muestro un mensaje personalizado indicando de que todo a ido bien.
+ * @param {String} mensaje
+ */
 function insertarMensajePersonalidadoBien(mensaje) {
   let header = document.getElementById("header");
   let mensajePersonalidado = modificarPlantillaMensajeBien(mensaje);
   header.insertAdjacentHTML("afterend", mensajePersonalidado);
 }
 
+/**
+ ** Muestro un mensaje personalizado indicando de que algo a ido mal.
+ * @param {String} mensaje
+ */
 function insertarMensajePersonalidadoMal(mensaje) {
   let header = document.getElementById("header");
   let mensajePersonalidado = modificarPlantillaMensajeMal(mensaje);
@@ -250,7 +265,7 @@ function insertarMensajePersonalidadoMal(mensaje) {
 }
 
 /**
- * Imprimo el producto con la función de añadir.
+ ** Imprimo el producto con la función de añadir.
  * @param {Object} producto
  * @param {String} id
  */
@@ -261,7 +276,7 @@ function imprimirProductoAnyadir(producto, id) {
 }
 
 /**
- * Imprimo el producto con la función de eliminar.
+ ** Imprimo el producto con la función de eliminar.
  * @param {Object} producto
  * @param {String} id
  */
@@ -271,6 +286,12 @@ function imprimirProductoEliminar(producto, id) {
   div.insertAdjacentHTML("beforeend", productoModificado);
 }
 
+/**
+ ** Imprimo el producto con la función de actualizar su precio.
+ * @param {Object} producto
+ * @param {String} id
+ * @param {String} idForm
+ */
 function imprimirProductoActualizar(producto, id, idForm) {
   let div = document.getElementById("divActualizar");
   let productoModificado = modificarProductoActualizar(producto, id, idForm);
@@ -278,7 +299,7 @@ function imprimirProductoActualizar(producto, id, idForm) {
 }
 
 /**
- * Imprimo el producto que mostraré en el carrito.
+ ** Imprimo el producto que mostraré en el carrito.
  * @param {Object} producto
  */
 function imprimirProductoCarrito(producto) {
@@ -288,7 +309,7 @@ function imprimirProductoCarrito(producto) {
 }
 
 /**
- * Imprimio un aviso indicando que el carrito está vacío.
+ ** Imprimio un aviso indicando que el carrito está vacío.
  */
 function imprimirAvisoCarritoVacio() {
   let div = document.getElementById("divCarrito");
@@ -296,14 +317,14 @@ function imprimirAvisoCarritoVacio() {
 }
 
 /**
- * Elimino el header.
+ ** Elimino el header.
  */
 function eliminarHeader() {
   body.removeChild(document.getElementById("header"));
 }
 
 /**
- * Elimino la presentación.
+ ** Elimino la presentación.
  */
 function eliminarPresentacion() {
   if (document.getElementById("presentacion") != null)
@@ -311,12 +332,15 @@ function eliminarPresentacion() {
 }
 
 /**
- * Elimino el footer.
+ ** Elimino el footer.
  */
 function eliminarFooter() {
   body.removeChild(document.getElementById("footer"));
 }
 
+/**
+ ** Elimino cualquier mensaje.
+ */
 function eliminarMensaje() {
   if (document.getElementById("mensaje") != null) {
     body.removeChild(document.getElementById("mensaje"));
@@ -324,7 +348,7 @@ function eliminarMensaje() {
 }
 
 /**
- * Elimino todo el contenido del inicio.
+ ** Elimino todo el contenido del inicio.
  */
 function eliminarTodoContenido() {
   eliminarHeader();
@@ -339,31 +363,38 @@ function eliminarTodoContenido() {
 }
 
 /**
- * Elimino el div con función de eliminarlo.
+ ** Elimino el div con función de eliminar productos.
  */
 function eliminarDivEliminar() {
   if (document.getElementById("divEliminar") != null)
     body.removeChild(document.getElementById("divEliminar"));
 }
 
+/**
+ ** Elimino el div con función de actualizar productos.
+ */
 function eliminarDivActualizar() {
   if (document.getElementById("divActualizar") != null)
     body.removeChild(document.getElementById("divActualizar"));
 }
 
+/**
+ ** Elimino el div con función de crear productos.
+ */
 function eliminarDivCrearJuego() {
   if (document.getElementById("divCrearProducto") != null)
     body.removeChild(document.getElementById("divCrearProducto"));
 }
+
 /**
- * Elimino el login.
+ ** Elimino el login.
  */
 function eliminarLogin() {
   body.removeChild(document.getElementById("contenidoPrincipal"));
 }
 
 /**
- * Elimino el div de juegos con la funcionalidad de añadirlos al carrito.
+ ** Elimino el div de juegos con la funcionalidad de añadirlos al carrito.
  */
 function eliminarJuegosAnyadir() {
   if (document.getElementById("divProductos") != null)
@@ -371,7 +402,7 @@ function eliminarJuegosAnyadir() {
 }
 
 /**
- * Elimino el carrito.
+ ** Elimino el carrito.
  */
 function eliminarCarrito() {
   if (document.getElementById("divCarrito") != null)
@@ -471,6 +502,13 @@ function modificarProductoEliminar(producto, id) {
   return plantillaDevolver;
 }
 
+/**
+ * Devuelvo el producto con la funcionalidad de actualizar su precio.
+ * @param {Object} producto
+ * @param {String} id
+ * @param {String} idForm
+ * @returns {String}
+ */
 function modificarProductoActualizar(producto, id, idForm) {
   let plantillaDevolver = plantillaProducto.replace(
     `<div></div>`,
@@ -498,13 +536,24 @@ function modificarProductoActualizar(producto, id, idForm) {
   return plantillaDevolver;
 }
 
+/**
+ * Modifico la plantilla con el mensaje personalizado.
+ * @param {String} mensaje
+ * @returns {String}
+ */
 function modificarPlantillaMensajeBien(mensaje) {
   return plantillaMensajeSatisfactorio.replace("MENSAJE", mensaje);
 }
 
+/**
+ * Modifico la plantilla con el mensaje personalizado.
+ * @param {String} mensaje
+ * @returns {String}
+ */
 function modificarPlantillaMensajeMal(mensaje) {
   return plantillaMensajeMal.replace("MENSAJE", mensaje);
 }
+
 /**
  * Modifico la plantilla indicando el precio.
  * @param {Int} precio

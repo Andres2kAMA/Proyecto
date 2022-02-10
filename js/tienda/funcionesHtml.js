@@ -11,7 +11,7 @@ import * as plantillaLogin from "../login/plantilla.js";
 let juegosCarrito = [];
 
 /**
- * Muestro la tienda si se ha registrado el Admin.
+ ** Muestro la tienda si se ha registrado el Admin.
  */
 function mostrarTiendaInicioAdmin() {
   plantilla.eliminarLogin();
@@ -21,7 +21,7 @@ function mostrarTiendaInicioAdmin() {
 }
 
 /**
- * Muestro la tienda si se ha registrado un usuario.
+ ** Muestro la tienda si se ha registrado un usuario.
  */
 function mostrarTiendaInicio() {
   plantilla.eliminarLogin();
@@ -149,6 +149,9 @@ function asignarEventosHeaderAdmin() {
   );
 }
 
+/**
+ * Asigno los eventos para cuando el usuario envie el formulario con los datos del nuevo producto.
+ */
 function asignarEventosCrearProducto() {
   document.getElementById("enviarFormProducto").addEventListener(
     "click",
@@ -169,7 +172,7 @@ function asignarEventosCrearProducto() {
 }
 
 /**
- * Asigno los eventos para eliminar el producto.
+ ** Asigno los eventos para eliminar el producto.
  * @param {String} idHtml
  * @param {String} id
  */
@@ -189,18 +192,12 @@ function asignarEventoEliminarProducto(idHtml, id) {
     false
   );
 }
-function crearObjetoJuego(datos) {
-  let juego = {
-    nombre: datos[0],
-    pegi: datos[1],
-    plataforma: datos[2],
-    precio: datos[3],
-    imagen: datos[4],
-  };
 
-  return juego;
-}
-
+/**
+ ** Asigno los eventos para actualizar el producto.
+ * @param {String} idHtml
+ * @param {String} id
+ */
 function asignarEventoActualizarProducto(idHtml, id) {
   document.getElementById(idHtml).addEventListener(
     "click",
@@ -230,25 +227,7 @@ function asignarEventoActualizarProducto(idHtml, id) {
 }
 
 /**
- * Inserto los productos del carrito.
- */
-function insertarProductosCarrito() {
-  let precioTotal = 0;
-  if (juegosCarrito.length != 0) {
-    for (let i = 0; i < juegosCarrito.length; i++) {
-      precioTotal += juegosCarrito[i].precio;
-      plantilla.imprimirProductoCarrito(juegosCarrito[i]);
-    }
-    plantilla.insertarPlantillaFinalizarCompra(precioTotal.toFixed(2));
-    asignarEventoComprar();
-  } else {
-    if (document.getElementById("carritoVacio") == null)
-      plantilla.imprimirAvisoCarritoVacio();
-  }
-}
-
-/**
- * Asigno los eventos para añadir los productos al carrito.
+ ** Asigno los eventos para añadir los productos al carrito.
  * @param {String} id
  * @param {Object} producto
  */
@@ -267,16 +246,38 @@ function asignarEventoComprar() {
     "click",
     function () {
       juegosCarrito = [];
-      plantilla.eliminarCarrito();
-      plantilla.insertarPlantillaDivCarrito();
-      //plantilla.insertarPlantillaPedidoRealizado();
+      plantilla.eliminarTodoContenido();
+      insertarPlantillasTiendaInicio();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarMensajePersonalidadoBien(
+        "Compra realizada de manera satisfactoria"
+      );
+      asignarEventosHeader();
     },
     false
   );
 }
 
 /**
- * Cambio el ID del body.
+ * Inserto los productos del carrito.
+ */
+function insertarProductosCarrito() {
+  let precioTotal = 0;
+  if (juegosCarrito.length != 0) {
+    for (let i = 0; i < juegosCarrito.length; i++) {
+      precioTotal += juegosCarrito[i].precio;
+      plantilla.imprimirProductoCarrito(juegosCarrito[i]);
+    }
+    plantilla.insertarPlantillaFinalizarCompra(precioTotal.toFixed(2));
+    asignarEventoComprar();
+  } else {
+    if (document.getElementById("carritoVacio") == null)
+      plantilla.imprimirAvisoCarritoVacio();
+  }
+}
+
+/**
+ * Cambio el ID del body en caso de que se haya logueado un usuario..
  */
 function cambiarIdBody() {
   if (document.getElementById("tiendaAdmin") == null) {
@@ -290,6 +291,9 @@ function cambiarIdBody() {
   }
 }
 
+/**
+ * Cambio el ID del body en caso de que se haya logueado el admin.
+ */
 function cambiarIdBodyAdmin() {
   if (document.getElementById("login") != null) {
     document.getElementById("login").id = "tiendaAdmin";
@@ -298,6 +302,11 @@ function cambiarIdBodyAdmin() {
   }
 }
 
+/**
+ * Devuelvo el precio introducido en el formulario.
+ * @param {String} id
+ * @returns {Int}
+ */
 function obtenerPrecioFormulario(id) {
   let form = document.getElementById(id);
   let precio = form[0].value;
@@ -307,6 +316,11 @@ function obtenerPrecioFormulario(id) {
     return precio;
   }
 }
+
+/**
+ * Devuelvo los datos del nuevo juego.
+ * @returns {Array}
+ */
 function obtenerDatosFormulario() {
   let form = document.getElementById("formCrearProducto");
   let juego = [];
@@ -321,6 +335,24 @@ function obtenerDatosFormulario() {
   }
   return juego;
 }
+
+/**
+ * Devuelvo un objeto.
+ * @param {Array} datos
+ * @returns {Object}
+ */
+function crearObjetoJuego(datos) {
+  let juego = {
+    nombre: datos[0],
+    pegi: datos[1],
+    plataforma: datos[2],
+    precio: datos[3],
+    imagen: datos[4],
+  };
+
+  return juego;
+}
+
 /**
  * TODO: EXPORTS.
  */
