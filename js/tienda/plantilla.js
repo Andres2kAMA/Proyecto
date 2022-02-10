@@ -8,7 +8,7 @@ const plantillaHeader = `<header class="p-3 mb-3 border-bottom" id="header">
 
                                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                                   <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-                                  <li><a href="#" class="nav-link px-2 link-dark">Juegos</a></li>
+                                  <li><a href="#" id="juegos" class="nav-link px-2 link-dark">Juegos</a></li>
                                   <li><a href="#" class="nav-link px-2 link-dark">Carrito</a></li>
                                 </ul>
 
@@ -49,6 +49,11 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   nosotros te enviaremos un cheque regalo para que la siguiente compra te salga más barata.
                                   </p>
                               </div>`;
+const plantillaDivProductos = `<div id="divProductos" class="row contrarProductos text-center">
+                              <h2>¡ Añade juegos al carrito !</h2>
+                              </div>`;
+
+const plantillaProducto = `<div></div>`;
 
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                               <div class="container p-4 pb-0">
@@ -73,19 +78,78 @@ function insertarPlantillaHeader() {
 function insertarPlantillaPresentacion() {
   body.insertAdjacentHTML("beforeend", plantillaPresentacion);
 }
+
+function insertarPlantillaDivProductos() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("afterend", plantillaDivProductos);
+}
+
 function insertarPlantillaFooter() {
   body.insertAdjacentHTML("beforeend", plantillaFooter);
+}
+
+function insertarToast() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("beforeend", mensajeToast);
 }
 /**
  ** Elimino todo el contenido del HTML menos el div#main.
  */
 function eliminarTodoContenidoPresentacion() {
   body.removeChild(document.getElementById("header"));
-  body.removeChild(document.getElementById("presentacion"));
+  if (document.getElementById("presentacion") != null)
+    body.removeChild(document.getElementById("presentacion"));
   body.removeChild(document.getElementById("footer"));
 }
 function eliminarTodoContenidoLogin() {
   body.removeChild(document.getElementById("contenidoPrincipal"));
+}
+
+function eliminarContenidoJuegos() {
+  if (document.getElementById("divProductos") != null)
+    body.removeChild(document.getElementById("divProductos"));
+}
+function eliminarPresentacion() {
+  body.removeChild(document.getElementById("presentacion"));
+}
+
+function modificarProductoAnyadir(producto, id) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    `<div class="col-md-6 col-sm-12 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw" class="centrar imagen" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.plataforma}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+            <li class="list-group-item">Pegi: ${producto.pegi} </li>
+          </ul>
+          <input type="button" class="btn btn-outline-primary" id="anyadirJuego${id}" value="Añadir juego al carrito" />
+          </div> 
+          <div class="toast" id="toast${id}">
+            <div class="toast-header">
+              <strong class="me-auto">${producto.nombre}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+              <p>El juego se ha añadido al carrito corréctamente.</p>
+            </div>
+        </div>
+        </div>
+       
+      </div>`
+  );
+  return plantillaDevolver;
+}
+
+function imprimirProductoAnyadir(producto, id) {
+  let div = document.getElementById("divProductos");
+  let productoModificado = modificarProductoAnyadir(producto, id);
+  div.insertAdjacentHTML("beforeend", productoModificado);
+  //funcionesHtml.declararEventoAnyadirProducto(`anyadirProducto${id}`, id);
 }
 export {
   insertarPlantillaHeader,
@@ -93,4 +157,9 @@ export {
   insertarPlantillaFooter,
   eliminarTodoContenidoPresentacion,
   eliminarTodoContenidoLogin,
+  imprimirProductoAnyadir,
+  insertarPlantillaDivProductos,
+  eliminarPresentacion,
+  insertarToast,
+  eliminarContenidoJuegos,
 };

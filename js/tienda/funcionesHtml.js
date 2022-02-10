@@ -18,10 +18,21 @@ function mostrarTiendaInicio() {
 }
 
 function asignarEventosHeader() {
+  document.getElementById("juegos").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPresentacion();
+      plantilla.insertarPlantillaDivProductos();
+      funcionesFirebase.mostrarTodosProductosAnyadir();
+    },
+    false
+  );
+
   document.getElementById("cerrarSesion").addEventListener(
     "click",
     function () {
       plantilla.eliminarTodoContenidoPresentacion();
+      plantilla.eliminarContenidoJuegos();
       cambiarIdBody();
       plantillaLogin.mostrarLogin();
       funcionesLogin.asignarEventosLogin();
@@ -30,6 +41,11 @@ function asignarEventosHeader() {
   );
 }
 
+function anyadirProducto(idHtml, id) {
+  document.getElementById(idHtml).onclick = function () {
+    new bootstrap.Toast(document.querySelector(`#toast${id}`)).show();
+  };
+}
 function cambiarIdBody() {
   if (document.getElementById("login") != null) {
     document.getElementById("login").id = "tienda";
@@ -41,4 +57,4 @@ function cambiarIdBody() {
 /**
  * TODO: EXPORTS.
  */
-export { mostrarTiendaInicio };
+export { mostrarTiendaInicio, anyadirProducto };

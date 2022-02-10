@@ -41,3 +41,32 @@ body {
 #tituloPresentacion {
   padding-bottom: 1em;
 }
+
+.centrarTexto {
+  text-align: center;
+}
+.centrarProductos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.producto {
+  padding: 3em;
+}
+
+.centrar {
+  padding: 10px;
+  margin: auto;
+  display: block;
+}
+
+.imagen {
+  transition: ease-in 2s;
+}
+
+.imagen:hover {
+  margin-top: 2px;
+  transform: scale(1.1);
+}
