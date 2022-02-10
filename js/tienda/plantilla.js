@@ -113,7 +113,36 @@ const plantillaMensajeSatisfactorio = `<div id="mensaje" class="alert alert-succ
 
 const plantillaMensajeMal = `<div id="mensaje" class="alert alert-danger m-4 text-center" role="alert">MENSAJE</div>`;
 
-const plantillaFormCrearProducto = ``;
+const plantillaFormCrearProducto = `<form id="formCrearProducto">
+                                      <div class="mb-4">
+                                          <label for="nombre" class="form-label">Nombre</label>
+                                          <input type="text" class="form-control" name="nombre" />
+                                      </div>
+                                      <div class="mb-4">
+                                          <label for="pegi" class="form-label">Pegi</label>
+                                          <input type="number" class="form-control" name="pegi" />
+                                      </div>
+
+                                      <div class="mb-4">
+                                          <label for="plataforma" class="form-label">Plataforma</label>
+                                          <input type="text" class="form-control" name="plataforma" />
+                                      </div>
+                                      <div class="mb-4">
+                                          <label for="precio" class="form-label">Precio</label>
+                                          <input type="number" class="form-control" name="precio" />
+                                      </div>
+
+                                      <div class="mb-4">
+                                          <label for="img" class="form-label">Imñagen</label>
+                                          <input type="text" class="form-control" name="img" />
+                                      </div>
+                                      <div class="d-grid">
+                                      <button type="button" class="btn btn-primary" id="enviarFormProducto">
+                                          Añadir el juego a la BBDD
+                                      </button>
+                                      </div>
+                                    </form>`;
+
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
                               <section class="mb-4">
@@ -185,6 +214,8 @@ function insertarPlantillaDivCrearProducto() {
   let header = document.getElementById("header");
   header.insertAdjacentHTML("afterend", plantillaDivCrearProducto);
 }
+
+function insertarFormularioCrearProducto() {}
 /**
  * Inserto el footer.
  */
