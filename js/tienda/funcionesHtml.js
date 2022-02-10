@@ -162,7 +162,7 @@ function asignarEventoEliminarProducto(idHtml, id) {
       plantilla.eliminarTodoContenido();
       insertarPlantillasTiendaInicio();
       plantilla.eliminarPresentacion();
-      plantilla.insertarMensajePersonalidado(
+      plantilla.insertarMensajePersonalidadoBien(
         "Producto eliminado de manera satisfactoria"
       );
       asignarEventosHeaderAdmin();
