@@ -35,7 +35,7 @@ const plantillaHeaderAdmin = `<header class="p-3 mb-3 border-bottom" id="header"
 
                                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                                       <li><a href="#" id="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
-                                      <li><a href="#"  class="nav-link px-2 link-dark">Añadir juego</a></li>
+                                      <li><a href="#" id="crearJuego" class="nav-link px-2 link-dark">Añadir juego</a></li>
                                       <li><a href="#" id="actualizarJuego" class="nav-link px-2 link-dark">Actualizar precio</a></li>
                                       <li><a href="#" id="borrarJuego" class="nav-link px-2 link-dark">Borrar juego</a></li>
                                     </ul>
@@ -96,6 +96,10 @@ const plantillaDivActualizar = `<div id="divActualizar" class="row contrarProduc
                                 <h2>Actualizar el precio de los juegos</h2>
                               </div>`;
 
+const plantillaDivActualizar = `<div id="divCrearProducto" class="row contrarProductos text-center">
+                                <h2>Inserta los datos del juego</h2>
+                               </div>`;
+
 const plantillaProducto = `<div></div>`;
 
 const plantillaCarritoVacio = `<div class="alert alert-danger text-center" id="carritoVacio">El carrito está vacío</div>`;
@@ -109,6 +113,7 @@ const plantillaMensajeSatisfactorio = `<div id="mensaje" class="alert alert-succ
 
 const plantillaMensajeMal = `<div id="mensaje" class="alert alert-danger m-4 text-center" role="alert">MENSAJE</div>`;
 
+const plantillaFormCrearProducto;
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
                               <section class="mb-4">
@@ -176,6 +181,10 @@ function insertarPlantillaDivActualizar() {
   header.insertAdjacentHTML("afterend", plantillaDivActualizar);
 }
 
+function insertarPlantillaDivCrearProducto() {
+  let header = document.getElementById("header");
+  header.insertAdjacentHTML("afterend", plantillaDivCrearProducto);
+}
 /**
  * Inserto el footer.
  */
@@ -474,6 +483,7 @@ export {
   insertarPlantillaDivProductosAnyadir,
   insertarPlantillaDivEliminar,
   insertarPlantillaDivActualizar,
+  insertarPlantillaDivCrearProducto,
   insertarPlantillaFinalizarCompra,
   insertarMensajePersonalidadoBien,
   insertarMensajePersonalidadoMal,

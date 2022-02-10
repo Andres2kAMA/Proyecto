@@ -96,6 +96,20 @@ function asignarEventosHeaderAdmin() {
     asignarEventosHeaderAdmin();
   });
 
+  document.getElementById("crearJuego").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarTodoContenido();
+      insertarPlantillasTiendaInicio();
+      asignarEventosHeaderAdmin();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarPlantillaDivCrearProducto();
+      plantilla.insertarFormularioCrearProducto();
+      asignarEventosCrearProducto();
+    },
+    false
+  );
+
   document.getElementById("actualizarJuego").addEventListener(
     "click",
     function () {
