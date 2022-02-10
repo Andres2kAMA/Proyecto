@@ -146,9 +146,9 @@ const plantillaFormCrearProducto = `<form id="formCrearProducto">
 const plantillaFooter = `<footer class="bottom  bg-dark text-center text-white" id="footer">
                             <div class="container p-4 pb-0">
                               <section class="mb-4">
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" ><i class="bi bi-instagram"></i></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://es-es.facebook.com/" role="button"><i class="bi bi-facebook"></i></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZXMifQ%3D%3D%22%7D" role="button"><i class="bi bi-twitter"></i></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/?hl=es" role="button" ><i class="bi bi-instagram"></i></a>
                                 <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Andres2kAMA/Proyecto" role="button"><i class="bi bi-github"></i></a>
                               </section>
                             </div>
