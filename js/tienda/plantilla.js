@@ -28,7 +28,7 @@ const plantillaPresentacion = `<div class="container text-center p-5" id="presen
                                   <h1 id="tituloPresentacion" >RGL</h1>
                                   <p>
                                   Somos una empresa comprometida con  brindar la mayor satisfacción a nuestros clientes. 
-                                  GAMERS es una empresa dedicada a vender juegos para PC, PS4 y XBOX, consolas, accesorios 
+                                  RGL es una empresa dedicada a vender juegos para PC, PS4 y XBOX, consolas, accesorios 
                                   de juegos, etc. Tenemos elementos para hacer mas cómoda la experiencia de juego. 
                                   Satisfacer las necesidades de las personas interesadas en los videojuegos y artículos de novedad, 
                                   prestandoles el mejor servicio por parte de todo el personal de la empresa,  
