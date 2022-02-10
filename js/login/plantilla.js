@@ -94,7 +94,8 @@ function insertarPlantillaRegistro() {
  ** Elimino todo el contenido del HTML menos el div#main.
  */
 function eliminarTodoContenido() {
-  body.removeChild(document.getElementById("contenidoPrincipal"));
+  if (document.getElementById("contenidoPrincipal") != null)
+    body.removeChild(document.getElementById("contenidoPrincipal"));
 }
 
 /**
