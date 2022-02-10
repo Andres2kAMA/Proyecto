@@ -69,7 +69,11 @@ async function anyadirUsuarioFirebase(usuario) {
 async function iniciarSesion(correo, contraseña) {
   signInWithEmailAndPassword(autentificacion, correo, contraseña)
     .then(() => {
-      funcionesTienda.mostrarTiendaInicio();
+      if (contraseña == "admin1") {
+        funcionesTienda.mostrarTiendaInicioAdmin();
+      } else {
+        funcionesTienda.mostrarTiendaInicio();
+      }
     })
     .catch(() => {
       if (document.getElementById("mensajeError") == null) {

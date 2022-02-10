@@ -10,17 +10,24 @@ import * as plantillaLogin from "../login/plantilla.js";
 
 let juegosCarrito = [];
 
+function mostrarTiendaInicioAdmin() {
+  plantilla.eliminarTodoContenidoLogin();
+  cambiarIdBodyAdmin();
+  insertarPlantillasTiendaInicio();
+  asignarEventosHeaderAdmin();
+}
+
 function mostrarTiendaInicio() {
   plantilla.eliminarTodoContenidoLogin();
   cambiarIdBody();
   insertarPlantillasTiendaInicio();
+  asignarEventosHeader();
 }
 
 function insertarPlantillasTiendaInicio() {
   plantilla.insertarPlantillaHeader();
   plantilla.insertarPlantillaPresentacion();
   plantilla.insertarPlantillaFooter();
-  asignarEventosHeader();
 }
 
 function asignarEventosHeader() {
@@ -52,6 +59,50 @@ function asignarEventosHeader() {
     false
   );
 
+  document.getElementById("cerrarSesion").addEventListener(
+    "click",
+    function () {
+      juegosCarrito = [];
+      plantilla.eliminarTodoContenidoPresentacion();
+      plantilla.eliminarContenidoJuegos();
+      plantilla.eliminarCarrito();
+      cambiarIdBody();
+      plantillaLogin.mostrarLogin();
+      funcionesLogin.asignarEventosLogin();
+    },
+    false
+  );
+}
+
+function asignarEventosHeaderAdmin() {
+  document.getElementById("inicio").addEventListener("click", function () {
+    plantilla.eliminarContenidoPrincipal();
+    insertarPlantillasTiendaInicio();
+  });
+  /*
+  document.getElementById("carrito").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarContenidoPrincipal();
+      insertarPlantillasTiendaInicio();
+      plantilla.eliminarPresentacion();
+      plantilla.insertarPlantillaDivCarrito();
+      insertarProductosCarrito();
+    },
+    false
+  );
+
+  document.getElementById("juegos").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPresentacion();
+      plantilla.eliminarCarrito();
+      plantilla.insertarPlantillaDivProductosAnyadir();
+      funcionesFirebase.mostrarTodosProductosAnyadir();
+    },
+    false
+  );
+*/
   document.getElementById("cerrarSesion").addEventListener(
     "click",
     function () {
@@ -103,14 +154,26 @@ function asignarEventoComprar() {
 }
 
 function cambiarIdBody() {
-  if (document.getElementById("login") != null) {
-    document.getElementById("login").id = "tienda";
+  if (document.getElementById("tiendaAdmin") == null) {
+    if (document.getElementById("login") != null) {
+      document.getElementById("login").id = "tienda";
+    } else {
+      document.getElementById("tienda").id = "login";
+    }
   } else {
-    document.getElementById("tienda").id = "login";
+    cambiarIdBodyAdmin();
+  }
+}
+
+function cambiarIdBodyAdmin() {
+  if (document.getElementById("login") != null) {
+    document.getElementById("login").id = "tiendaAdmin";
+  } else {
+    document.getElementById("tiendaAdmin").id = "login";
   }
 }
 
 /**
  * TODO: EXPORTS.
  */
-export { mostrarTiendaInicio, anyadirProducto };
+export { mostrarTiendaInicioAdmin, mostrarTiendaInicio, anyadirProducto };

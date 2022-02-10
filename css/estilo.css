@@ -27,7 +27,8 @@ body {
   );
 }
 
-#tienda {
+#tienda,
+#tiendaAdmin {
   background-color: white;
 }
 

@@ -23,6 +23,29 @@ const plantillaHeader = `<header class="p-3 mb-3 border-bottom" id="header">
                               </div>
                             </div>
                           </header>`;
+const plantillaHeaderAdmin = `<header class="p-3 mb-3 border-bottom" id="header">
+                          <div class="container">
+                            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                                 
+                              <img src="./img/logo.png" class="rounded-circle pr-5" width="32" height="32"/>
+
+                              <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                                <li><a href="#" id="inicio" class="nav-link px-2 link-secondary">Inicio</a></li>
+                                <li><a href="#"  class="nav-link px-2 link-dark">Actualizar precio</a></li>
+                                <li><a href="#"  class="nav-link px-2 link-dark">Borrar juego</a></li>
+                              </ul>
+
+                              <div class="dropdown text-end">
+                                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <img src="https://tse2.mm.bing.net/th?id=OIP.HAlzz7_SUXjXKwsKkyBmJQHaHa&pid=Api&P=0&w=165&h=165" alt="mdo" class="rounded-circle" width="32" height="32">
+                                </a>
+                                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                                  <li><a class="dropdown-item" href="#" id="cerrarSesion">Cerrar sesión</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </header>`;
 
 const plantillaPresentacion = `<div class="container text-center p-5" id="presentacion">
                                   <h1 id="tituloPresentacion" >RGL</h1>
@@ -85,7 +108,11 @@ const plantillaPedidoRealizado = `<div class="alert alert-success m-4"  role="al
 const body = document.getElementById("main");
 
 function insertarPlantillaHeader() {
-  body.insertAdjacentHTML("beforeend", plantillaHeader);
+  if (document.getElementById("tienda") != null) {
+    body.insertAdjacentHTML("beforeend", plantillaHeader);
+  } else {
+    body.insertAdjacentHTML("beforeend", plantillaHeaderAdmin);
+  }
 }
 
 function insertarPlantillaPresentacion() {
